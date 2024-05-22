@@ -54,10 +54,14 @@ RMSE std: 0.0007641590472822367
 	2. Fine tune the descriptors with domain specific texts
 		- might be really more involved than we thought
 	
-3. Improve Deepnose's design: I heard recently there are some ways to do 3D invariance learning for molecules (not GNNs)
+2. Improve Deepnose's design: I heard recently there are some ways to do 3D invariance learning for molecules (not GNNs)
+
+3. Make use of other datasets (same mixture scores and non equal intensity mixtures (concentraion?)): need to read the papers first
+
+
 
 Just for the sake of discussion:
 
-4. Diffusion models for molecule to learn the spatial distribution??? As there are so many odor molecules
+1. Diffusion models for molecule to learn the spatial distribution??? As there are so many odor molecules
 
-5. Alphafold 3 ??
+2. Alphafold 3 ??
