@@ -3,6 +3,10 @@ Here we record some result metrics and TO-DOs. Let's go!
 ## RESULTS
 
 ---
+We are currently using Sergey's updated Deepnose embeddings trained on the Leffingwell dataset (task is 3000 mono molecules for descriptor scoring, descriptor represented with Word2Vec?).
+
+We use RF and RGBoost models to see if Deepnose features is predictable for perceptual distance. 
+
 ### 05/21/24
 
 Parameter random search with feature combination method == "avg":
@@ -38,14 +42,15 @@ RMSE std: 0.0007641590472822367
 
 
 ---
-### TO-DO:
+## TO-DO:
 
 - rewind the data papers and summarize them (this week);
 - why we see Snitz 1 spread differently?
+- create dimension wise difference features
 
 
 ---
-### IDEAS (good or bad)
+## IDEAS (good or bad)
 
 1. Make use of multiple bigger dataset:
 	1. Combine Deepnose trained on different descriptor sets, using alignment like "cross model fine-tuning aligned and refined"
@@ -58,6 +63,7 @@ RMSE std: 0.0007641590472822367
 
 3. Make use of other datasets (same mixture scores and non equal intensity mixtures (concentraion?)): need to read the papers first
 
+4. Combine with Dragon features 
 
 
 Just for the sake of discussion:
