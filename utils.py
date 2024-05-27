@@ -16,41 +16,54 @@ def get_individual_embedding(label, dataset, mixtures_IDs, CID2features):
     
     return np.array(molecule_embeddings), CIDs
 
-def combine_molecules(label, dataset, mixtures_IDs, CID2features,  method = 'avg'):
-    '''
-    return mixture embedding vector, and summary stats
-    '''
-    molecule_embeddings, CIDs = get_individual_embedding(label, dataset, mixtures_IDs, CID2features)  # (X, 96)
+def combine_molecules(label, dataset, mixtures_IDs, CID2features, method='avg', beta=None):
+    """
+    Return mixture embedding vector, and summary stats
+    """
+    molecule_embeddings, CIDs = get_individual_embedding(label, dataset, mixtures_IDs, CID2features)
     num_mono = molecule_embeddings.shape[0]
+
     if method == 'avg':
-        mixture_embedding = molecule_embeddings.mean(axis = 0)
-
-    if method == 'sum':
-        mixture_embedding = molecule_embeddings.sum(axis = 0)
-    
-    if method == 'log':
-        exp_embeddings = np.exp(molecule_embeddings)
-        summed = np.sum(exp_embeddings, axis=0)
-        mixture_embedding = np.log(summed)
-
-    if method == 'geometric':
+        mixture_embedding = molecule_embeddings.mean(axis=0)
+    elif method == 'sum':
+        mixture_embedding = molecule_embeddings.sum(axis=0)
+    elif method == 'max':
+        mixture_embedding = molecule_embeddings.max(axis=0)
+    elif method == 'log':
+        if beta is None:
+            exp_embeddings = np.exp(molecule_embeddings)
+            summed = np.sum(exp_embeddings, axis=0)
+            mixture_embedding = np.log(summed)
+        else:
+            mixture_embedding = log_sum_exp_beta(molecule_embeddings, beta)
+    elif method == 'geometric':
         product = np.prod(molecule_embeddings, axis=0)
         mixture_embedding = np.power(product, 1 / molecule_embeddings.shape[0])
+    else:
+        raise ValueError(f"Invalid method: {method}")
 
     return mixture_embedding, (num_mono, CIDs)
 
-def format_Xy(training_set,  mixtures_IDs, CID2features, method = 'log'):
+def log_sum_exp_beta(molecule_embeddings, beta):
+    exp_embeddings = np.exp(beta * molecule_embeddings)
+    summed = np.sum(exp_embeddings, axis=0)
+    mixture_embedding = (1 / beta) * np.log(summed)
+    return mixture_embedding
 
-    # Create the dataset in the learning format using training data:
+
+def format_Xy(training_set, mixtures_IDs, CID2features, method='log', beta=None):
     X = []
     y = []
     num_monos = []
     CIDs_all = []
 
     for _, row in training_set.iterrows():
-        
-        mixture1, summary1 = combine_molecules(label = row['Mixture 1'], dataset = row['Dataset'], mixtures_IDs = mixtures_IDs, CID2features = CID2features,  method = method)
-        mixture2, summary2 = combine_molecules(label = row['Mixture 2'], dataset = row['Dataset'],  mixtures_IDs = mixtures_IDs, CID2features = CID2features, method = method)
+        mixture1, summary1 = combine_molecules(label=row['Mixture 1'], dataset=row['Dataset'],
+                                               mixtures_IDs=mixtures_IDs, CID2features=CID2features,
+                                               method=method, beta=beta)
+        mixture2, summary2 = combine_molecules(label=row['Mixture 2'], dataset=row['Dataset'],
+                                               mixtures_IDs=mixtures_IDs, CID2features=CID2features,
+                                               method=method, beta=beta)
         X.append((mixture1, mixture2))
         y.append(row['Experimental Values'])
         num_monos.append([summary1[0], summary2[0]])

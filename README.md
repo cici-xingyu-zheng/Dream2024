@@ -23,7 +23,6 @@ R std: 0.012305155699621435
 RMSE mean: 0.13011032718717613
 RMSE std: 0.0007585502287922674
 ```
----
 ### 05/22/24
 Parameter random search with feature combination method == "log":
 ```
@@ -39,6 +38,29 @@ R std: 0.0085436109653248
 RMSE mean: 0.12423745074940677
 RMSE std: 0.0007641590472822367
 ```
+### 05/27/24
+Parameter random search with feature combination method == "max":
+```
+RandomForest:
+R mean: 0.5944725056504726
+R std: 0.010848141551718406
+RMSE mean: 0.12615760763131553
+RMSE std: 0.0006135566872935029
+
+XGBoost:
+R mean: 0.6201911367008879
+R std: 0.006041495836494987
+RMSE mean: 0.12340290856833196
+RMSE std: 0.0005129668557081593
+```
+
+**Add beta parameter**:
+
+``` log_sum_exp_beta(x_1, x_2, ..., x_n) = (1/beta) * log(sum(exp(beta * x_i)))```
+When beta > 1, the operation becomes more "peaked", emphasizing the maximum value in the input. 
+When 0 < beta < 1, the operation becomes smoother, giving more weight to the smaller values in the input.
+As beta approaches 0, the log-sum-exp operation with the beta parameter approximates the arithmetic mean (linear combination) of the input values.
+As beta approaches infinity, the log-sum-exp operation with the beta parameter approximates the maximum value of the input values, emphasizing the most dominant component.
 
 
 ---
@@ -53,13 +75,16 @@ RMSE std: 0.0007641590472822367
 1. explore beta (grid search);
 2. compare/combine Mordred descriptor;
 3. implement max pool;
+	- added
 4. try Pearson as the creterion for the sake of it;
+	- don't think it make sense for decision trees..
 
 Figure out:
 - Does 500 contains identical?
 	- Nope;
 - What are the avaiable GCN strctures?
 	- I located where it got mentioned in the Webnar: 00:27:44. Don't know what this team is though.
+	- The Dhurandhar paper code: https://github.com/jeriscience/OlfactionAD
 ---
 ## IDEAS (good or bad)
 

@@ -1,6 +1,7 @@
 
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import train_test_split, KFold, RandomizedSearchCV
+
 from utils import *
 import xgboost as xgb
 
@@ -71,3 +72,108 @@ def para_search(seed, X, y_true):
     print("RMSE:", xgb_rmse)
 
     return  rf_random.best_params_, xgb_random.best_params_
+
+def avg_rf_best(rf_best, X_features, y_true):
+    # Random seeds to get average performance
+    random_seeds = [42, 123, 456, 789, 1011]
+    n_fold = 10  # Number of folds for cross-validation
+
+    rf_corr_list = []
+    rf_rmse_list = []
+
+    # Evaluate the models with different random seeds
+    for seed in random_seeds:
+        np.random.seed(seed)
+        
+        # Create the XGBoost model with the best hyperparameters
+        rf_model =  RandomForestRegressor(**rf_best, random_state=seed)
+        
+        # Create the KFold object for cross-validation
+        kf = KFold(n_splits=n_fold, shuffle=True, random_state=seed)
+        
+        rf_corr_fold = []
+        rf_rmse_fold = []
+        
+        # Perform cross-validation
+        for train_index, test_index in kf.split(X_features):
+            X_train, X_test = X_features[train_index], X_features[test_index]
+            y_train, y_test = y_true[train_index], y_true[test_index]
+            
+            # Train the model
+            rf_model.fit(X_train, y_train)
+            
+            # Evaluate the model on the testing fold
+            rf_pred = rf_model.predict(X_test)
+            rf_corr = np.corrcoef(rf_pred, y_test)[0, 1]
+            rf_rmse = np.sqrt(mean_squared_error(y_test, rf_pred))
+            
+            rf_corr_fold.append(rf_corr)
+            rf_rmse_fold.append(rf_rmse)
+        
+        # Calculate the average performance across all folds
+        rf_corr_avg = np.mean(rf_corr_fold)
+        rf_rmse_avg = np.mean(rf_rmse_fold)
+        
+        rf_corr_list.append(rf_corr_avg)
+        rf_rmse_list.append(rf_rmse_avg)
+
+    print("RandomForest:")
+    print("R mean:", np.mean(rf_corr_list))
+    print("R std:", np.std(rf_corr_list))
+    print("RMSE mean:", np.mean(rf_rmse_list))
+    print("RMSE std:", np.std(rf_rmse_list))
+
+    return np.mean(rf_corr_list), np.mean(rf_rmse_list)
+    
+
+def avg_rgb_best(rbg_best, X_features, y_true):
+    # Random seeds to get average performance
+    random_seeds = [42, 123, 456, 789, 1011]
+    n_fold = 10  # Number of folds for cross-validation
+
+    xgb_corr_list = []
+    xgb_rmse_list = []
+
+    # Evaluate the models with different random seeds
+    for seed in random_seeds:
+        np.random.seed(seed)
+        
+        # Create the XGBoost model with the best hyperparameters
+        xgb_model = xgb.XGBRegressor(**rbg_best, random_state=seed)
+        
+        # Create the KFold object for cross-validation
+        kf = KFold(n_splits=n_fold, shuffle=True, random_state=seed)
+        
+        xgb_corr_fold = []
+        xgb_rmse_fold = []
+        
+        # Perform cross-validation
+        for train_index, test_index in kf.split(X_features):
+            X_train, X_test = X_features[train_index], X_features[test_index]
+            y_train, y_test = y_true[train_index], y_true[test_index]
+            
+            # Train the model
+            xgb_model.fit(X_train, y_train)
+            
+            # Evaluate the model on the testing fold
+            xgb_pred = xgb_model.predict(X_test)
+            xgb_corr = np.corrcoef(xgb_pred, y_test)[0, 1]
+            xgb_rmse = np.sqrt(mean_squared_error(y_test, xgb_pred))
+            
+            xgb_corr_fold.append(xgb_corr)
+            xgb_rmse_fold.append(xgb_rmse)
+        
+        # Calculate the average performance across all folds
+        xgb_corr_avg = np.mean(xgb_corr_fold)
+        xgb_rmse_avg = np.mean(xgb_rmse_fold)
+        
+        xgb_corr_list.append(xgb_corr_avg)
+        xgb_rmse_list.append(xgb_rmse_avg)
+
+    print("XGBoost:")
+    print("R mean:", np.mean(xgb_corr_list))
+    print("R std:", np.std(xgb_corr_list))
+    print("RMSE mean:", np.mean(xgb_rmse_list))
+    print("RMSE std:", np.std(xgb_rmse_list))
+
+    return np.mean(xgb_corr_list), np.mean(xgb_rmse_list)
