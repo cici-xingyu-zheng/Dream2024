@@ -48,7 +48,18 @@ RMSE std: 0.0007641590472822367
 - why we see Snitz 1 spread differently?
 - create dimension wise difference features
 
+### 05/24/24 Discussion with Sergey:
 
+1. explore beta (grid search);
+2. compare/combine Mordred descriptor;
+3. implement max pool;
+4. try Pearson as the creterion for the sake of it;
+
+Figure out:
+- Does 500 contains identical?
+	- Nope;
+- What are the avaiable GCN strctures?
+	- I located where it got mentioned in the Webnar: 00:27:44. Don't know what this team is though.
 ---
 ## IDEAS (good or bad)
 
