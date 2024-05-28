@@ -95,7 +95,10 @@ XGBoost - RMSE: 0.132
 
 - rewind the data papers and summarize them (this week);
 - why we see Snitz 1 spread differently?
+	- ''We prepared several different versions for each mixture size containing 1, 4, 10, 15, 20, 30, 40 or 43 components, such that half of the versions were **wellspread in perceptual space**, and half of the versions were **wellspread in physicochemical space**.''
 - create dimension wise difference features
+- why the `Dragon_Descriptors.csv` has 4000 feature dim? Snitz has 1300?
+- try the Snitz normalization
 
 ### 05/24/24 Discussion with Sergey:
 
