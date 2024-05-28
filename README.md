@@ -39,7 +39,7 @@ RMSE mean: 0.12423745074940677
 RMSE std: 0.0007641590472822367
 ```
 ### 05/27/24
-Parameter random search with feature combination method == "max":
+1. Parameter random search with feature combination method == "max":
 ```
 RandomForest:
 R mean: 0.5944725056504726
@@ -54,14 +54,41 @@ RMSE mean: 0.12340290856833196
 RMSE std: 0.0005129668557081593
 ```
 
-**Add beta parameter**:
+2. **Add beta parameter**:
 
 ``` log_sum_exp_beta(x_1, x_2, ..., x_n) = (1/beta) * log(sum(exp(beta * x_i)))```
-When beta > 1, the operation becomes more "peaked", emphasizing the maximum value in the input. 
-When 0 < beta < 1, the operation becomes smoother, giving more weight to the smaller values in the input.
-As beta approaches 0, the log-sum-exp operation with the beta parameter approximates the arithmetic mean (linear combination) of the input values.
-As beta approaches infinity, the log-sum-exp operation with the beta parameter approximates the maximum value of the input values, emphasizing the most dominant component.
 
+- When beta > 1, the operation becomes more "peaked", emphasizing the maximum value in the input. 
+
+- When 0 < beta < 1, the operation becomes smoother, giving more weight to the smaller values in the input.
+
+- As beta approaches 0, the log-sum-exp operation with the beta parameter approximates the arithmetic mean (linear combination) of the input values.
+
+- As beta approaches infinity, the log-sum-exp operation with the beta parameter approximates the maximum value of the input values, emphasizing the most dominant component.
+
+We did a beta sweep with beta = 0.1 - 10; bigger beta perform slightly better (See `Output/beta_sweep.txt`)
+
+3. **Add dragon**:
+
+We also tried on the Dragon descriptors provided by the organizers. In a standard initalization, mixture combined by averaging, although the code runs very slowly (Feature Dim ~9000, training > 30 min) we were able to obtain comparible results as Deenose features:
+
+``` 
+Random Forest - R: 0.595
+Random Forest - RMSE: 0.126
+
+XGBoost - R: 0.544
+XGBoost - RMSE: 0.133
+```
+
+Blindly stacking deepnose and dragon doesn't seem to help too much:
+
+```
+Random Forest - R: 0.585
+Random Forest - RMSE: 0.127
+
+XGBoost - R: 0.551
+XGBoost - RMSE: 0.132
+```
 
 ---
 ## TO-DO:
@@ -73,6 +100,7 @@ As beta approaches infinity, the log-sum-exp operation with the beta parameter a
 ### 05/24/24 Discussion with Sergey:
 
 1. explore beta (grid search);
+	- done
 2. compare/combine Mordred descriptor;
 3. implement max pool;
 	- added

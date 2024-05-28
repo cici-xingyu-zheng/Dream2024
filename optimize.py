@@ -117,7 +117,7 @@ def avg_rf_best(rf_best, X_features, y_true):
         rf_corr_list.append(rf_corr_avg)
         rf_rmse_list.append(rf_rmse_avg)
 
-    print("RandomForest:")
+    print("RandomForest Average Performance:")
     print("R mean:", np.mean(rf_corr_list))
     print("R std:", np.std(rf_corr_list))
     print("RMSE mean:", np.mean(rf_rmse_list))
@@ -170,7 +170,7 @@ def avg_rgb_best(rbg_best, X_features, y_true):
         xgb_corr_list.append(xgb_corr_avg)
         xgb_rmse_list.append(xgb_rmse_avg)
 
-    print("XGBoost:")
+    print("XGBoost Average Performance:")
     print("R mean:", np.mean(xgb_corr_list))
     print("R std:", np.std(xgb_corr_list))
     print("RMSE mean:", np.mean(xgb_rmse_list))
