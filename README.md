@@ -100,6 +100,7 @@ XGBoost - RMSE: 0.132
 - why the `Dragon_Descriptors.csv` has 4000 feature dim? Snitz has 1300? Find out their 21 descriptors
 - try the Snitz normalization
 	- judge by the log standard deviation (some might be log normal distributed)
+- add identical molecules
 
 ### 05/24/24 Discussion with Sergey:
 
