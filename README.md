@@ -97,8 +97,9 @@ XGBoost - RMSE: 0.132
 - why we see Snitz 1 spread differently?
 	- ''We prepared several different versions for each mixture size containing 1, 4, 10, 15, 20, 30, 40 or 43 components, such that half of the versions were **wellspread in perceptual space**, and half of the versions were **wellspread in physicochemical space**.''
 - create dimension wise difference features
-- why the `Dragon_Descriptors.csv` has 4000 feature dim? Snitz has 1300?
+- why the `Dragon_Descriptors.csv` has 4000 feature dim? Snitz has 1300? Find out their 21 descriptors
 - try the Snitz normalization
+	- judge by the log standard deviation (some might be log normal distributed)
 
 ### 05/24/24 Discussion with Sergey:
 
@@ -115,6 +116,7 @@ Figure out:
 	- Nope;
 - What are the avaiable GCN strctures?
 	- I located where it got mentioned in the Webnar: 00:27:44. Don't know what this team is though.
+		- Michael Schmuker https://github.com/Huitzilo
 	- The Dhurandhar paper code: https://github.com/jeriscience/OlfactionAD
 ---
 ## IDEAS (good or bad)
