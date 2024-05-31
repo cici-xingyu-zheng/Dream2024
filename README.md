@@ -122,7 +122,7 @@ Figure out:
 
 ### 05/31/24 Extended Datasets:
 
-- what I imagine the format of the spreadsheet:
+What I imagine the format of the spreadsheet can be:
 
 ```
 # extended_training_set
@@ -139,6 +139,18 @@ Figure out:
 # extended_molecule_intensites (if avaiable)
 'Dataset'	'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
 ```
+
+First it'd be great to have the `molecule_intensites` dataframe for the experiment 4 and 5 in Ravia 2020. I would imagine that it has the same columns as `extended_molecule_intensites` described above.
+
+- If two concentrations are used, they can each be a row of data.
+- **Discuss**: I am not sure how many experimental values are reported based on different `Experimental Type`, as the have their own rating task, they also did the triangular and the two-alternative same–different task — but we can figure this out together.
+
+Second, to extend the data to other Ravia experiments, it would be lovely to have:
+
+1. experiment 1
+2. experiment 2
+3. experiment 3, the perfume one (if the CIDs are available)
+4. experiment 6
 
 
 ---
