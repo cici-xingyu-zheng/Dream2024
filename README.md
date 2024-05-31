@@ -120,6 +120,8 @@ Figure out:
 		- Michael Schmuker https://github.com/Huitzilo
 	- The Dhurandhar paper code: https://github.com/jeriscience/OlfactionAD
 
+
+
 ### 05/31/24 Extended Datasets:
 
 What I imagine the format of the spreadsheet can be:
@@ -129,16 +131,18 @@ What I imagine the format of the spreadsheet can be:
 'Dataset', 'Mixture 1', 'Mixture 2', 'Experimental Values', 'Experimental Type', 
 'Exp1',     1,           2,          .33,                   'rate' # (or 'tri')
 ```
-
+Column names, and an example column.
 ```
 # extended_mxiture_IDs
-'Dataset'	'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
+'Dataset' 'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
 ```
+Column names.
 
 ```
 # extended_molecule_intensites (if avaiable)
-'Dataset'	'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
+'Dataset' 'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
 ```
+Column names.
 
 First it'd be great to have the `molecule_intensites` dataframe for the experiment 4 and 5 in Ravia 2020. I would imagine that it has the same columns as `extended_molecule_intensites` described above.
 
@@ -151,6 +155,9 @@ Second, to extend the data to other Ravia experiments, it would be lovely to hav
 2. experiment 2
 3. experiment 3, the perfume one (if the CIDs are available)
 4. experiment 6
+
+
+
 
 
 ---
