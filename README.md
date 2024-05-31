@@ -119,6 +119,28 @@ Figure out:
 	- I located where it got mentioned in the Webnar: 00:27:44. Don't know what this team is though.
 		- Michael Schmuker https://github.com/Huitzilo
 	- The Dhurandhar paper code: https://github.com/jeriscience/OlfactionAD
+
+### 05/31/24 Extended Datasets:
+
+- what I imagine the format of the spreadsheet:
+
+```
+# extended_training_set
+'Dataset', 'Mixture 1', 'Mixture 2', 'Experimental Values', 'Experimental Type', 
+'Exp1',     1,           2,          .33,                   'rate' # (or 'tri')
+```
+
+```
+# extended_mxiture_IDs
+'Dataset'	'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
+```
+
+```
+# extended_molecule_intensites (if avaiable)
+'Dataset'	'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
+```
+
+
 ---
 ## IDEAS (good or bad)
 
