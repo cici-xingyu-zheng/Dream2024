@@ -1,5 +1,5 @@
-from utils import *
-from optimize import *
+from src.utils import *
+from src.optimize import *
 import numpy as np
 import pandas as pd
 import seaborn as sns

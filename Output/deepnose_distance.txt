@@ -1,0 +1,72 @@
+Random search for best hyperparams: round 1 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 200, 'min_samples_split': 10, 'max_features': 'log2', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9347422450574646
+RMSE: 0.07347823322247451
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.5, 'n_estimators': 200, 'max_depth': 3, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.8218071737205348
+RMSE: 0.10510914899408014
+
+RandomForest Average Performance:
+R mean: 0.5719254717969703
+R std: 0.0056845341775796955
+RMSE mean: 0.12955382780263236
+RMSE std: 0.0005859589379107731
+
+XGBoost Average Performance:
+R mean: 0.5570208556465858
+R std: 0.007638363630792434
+RMSE mean: 0.13193540683240676
+RMSE std: 0.0003685760439848842
+
+Random search for best hyperparams: round 2 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 100, 'min_samples_split': 5, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9581423121312168
+RMSE: 0.06017466893092425
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 100, 'max_depth': 7, 'learning_rate': 0.1, 'colsample_bytree': 0.5}
+Correlation: 0.999849162400056
+RMSE: 0.003231756963904804
+
+RandomForest Average Performance:
+R mean: 0.5711316954533808
+R std: 0.007056356051400997
+RMSE mean: 0.1291524218251638
+RMSE std: 0.0005344304404663452
+
+XGBoost Average Performance:
+R mean: 0.5529800785730214
+R std: 0.013781764759360184
+RMSE mean: 0.13079544489776115
+RMSE std: 0.001310026377038261
+
+Random search for best hyperparams: round 3 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 50, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': 30, 'bootstrap': True}
+Correlation: 0.973242763248856
+RMSE: 0.05012637376799386
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 200, 'max_depth': 3, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.8363960503758388
+RMSE: 0.10317381729448083
+
+RandomForest Average Performance:
+R mean: 0.5710256964357463
+R std: 0.007260260252337748
+RMSE mean: 0.1289392397900368
+RMSE std: 0.0004896571537120407
+
+XGBoost Average Performance:
+R mean: 0.5572664967616152
+R std: 0.006874569945350524
+RMSE mean: 0.13196115556788432
+RMSE std: 0.0006072281665140968
+

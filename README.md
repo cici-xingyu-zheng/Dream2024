@@ -90,12 +90,92 @@ XGBoost - R: 0.551
 XGBoost - RMSE: 0.132
 ```
 
+4. Q&A: 
+	- why we see Snitz 1 spread differently?
+		- ''We prepared several different versions for each mixture size containing 1, 4, 10, 15, 20, 30, 40 or 43 components, such that half of the versions were **wellspread in perceptual space**, and half of the versions were **wellspread in physicochemical space**.''
+	- Does 500 contains identical?
+		- Nope;
+	- What are the avaiable GCN strctures?
+		- I located where it got mentioned in the Webnar: 00:27:44. Don't know what this team is though.
+		- Michael Schmuker https://github.com/Huitzilo
+	- The Dhurandhar paper code: https://github.com/jeriscience/OlfactionAD
+
+
+### 05/31/24
+**Planning:**
+- for Deepnose features, try using difference:
+	- For mean: by sum
+	- For log: by division
+
+- for Dragon features:
+	- first, clean up the same value;
+	- second, plot svd;
+	- then:
+		1. log normal distribution of features?
+			- try different ways of normalizing;
+		2. try reducing the dimension
+- we need to figure out some confusion matrix like things, that allow us to know which dataset perform worse
+	- Bushdid underperform consistently using different deepnose feature combinations
+
+**Progress:**
+1. We plotted the deepnose features distribution, and found out that it looks more like log normal; therefore we try out log the features first then standard transform; results stand out from random seed; In the optimization round, the result is slightly better and more robust:
+```
+RandomForest Average Performance:
+R mean: 0.6258733379314186
+R std: 0.007713393434087301
+RMSE mean: 0.12375755904465387
+RMSE std: 0.0005545934581237493
+
+XGBoost Average Performance:
+R mean: 0.6149325792301861
+R std: 0.00786442684116577
+RMSE mean: 0.125260023134671
+RMSE std: 0.0006472561753324663
+```
+
+2. Distance features:
+
+For log distance, with random seed:
+```
+Random Forest - R: 0.598
+Random Forest - RMSE: 0.126
+
+XGBoost - R: 0.561
+XGBoost - RMSE: 0.131
+```
+
+For avg distance, with random seed:
+```
+Random Forest - R: 0.560
+Random Forest - RMSE: 0.130
+
+XGBoost - R: 0.552
+XGBoost - RMSE: 0.132
+```
+
+For log standard, then avg distance, with random seed:
+```
+Random Forest - R: 0.588
+Random Forest - RMSE: 0.127
+
+XGBoost - R: 0.539
+XGBoost - RMSE: 0.134
+```
+
+Okay stacked, with random seed, - there seems to be improvement:
+```
+Random Forest - R: 0.592
+Random Forest - RMSE: 0.126
+
+XGBoost - R: 0.538
+XGBoost - RMSE: 0.134
+```
+
+We decided to stack the difference features and optimize over that. The mean performance is not as imporessive as expected so we will perhaps still use the concatinated features for now; to consider combining with Dragon features.
+
 ---
 ## TO-DO:
 
-- rewind the data papers and summarize them (this week);
-- why we see Snitz 1 spread differently?
-	- ''We prepared several different versions for each mixture size containing 1, 4, 10, 15, 20, 30, 40 or 43 components, such that half of the versions were **wellspread in perceptual space**, and half of the versions were **wellspread in physicochemical space**.''
 - create dimension wise difference features
 - why the `Dragon_Descriptors.csv` has 4000 feature dim? Snitz has 1300? Find out their 21 descriptors
 - try the Snitz normalization
@@ -113,13 +193,6 @@ XGBoost - RMSE: 0.132
 	- don't think it make sense for decision trees..
 
 Figure out:
-- Does 500 contains identical?
-	- Nope;
-- What are the avaiable GCN strctures?
-	- I located where it got mentioned in the Webnar: 00:27:44. Don't know what this team is though.
-		- Michael Schmuker https://github.com/Huitzilo
-	- The Dhurandhar paper code: https://github.com/jeriscience/OlfactionAD
-
 
 
 ### 05/31/24 Extended Datasets:
@@ -131,7 +204,7 @@ What I imagine the format of the spreadsheet can be:
 'Dataset', 'Mixture 1', 'Mixture 2', 'Experimental Values', 'Experimental Type', 
 'Exp1',     1,           2,          .33,                   'rate' # (or 'tri')
 ```
-Column names, and an example column.
+Column names, and an example row.
 ```
 # extended_mxiture_IDs
 'Dataset' 'Mixture Label'	'CID'	'CID.1'	'CID.2'	'CID.3'	'CID.4'	'CID.5'	'CID.6'	...
@@ -155,8 +228,6 @@ Second, to extend the data to other Ravia experiments, it would be lovely to hav
 2. experiment 2
 3. experiment 3, the perfume one (if the CIDs are available)
 4. experiment 6
-
-
 
 
 
