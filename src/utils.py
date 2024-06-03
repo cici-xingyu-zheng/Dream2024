@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from scipy.special import logsumexp
 
 
 def get_individual_embedding(label, dataset, mixtures_IDs, CID2features):
@@ -16,6 +17,43 @@ def get_individual_embedding(label, dataset, mixtures_IDs, CID2features):
     
     return np.array(molecule_embeddings), CIDs
 
+# def combine_molecules(label, dataset, mixtures_IDs, CID2features, method='avg', beta=None):
+#     """
+#     Return mixture embedding vector, and summary stats
+#     """
+#     molecule_embeddings, CIDs = get_individual_embedding(label, dataset, mixtures_IDs, CID2features)
+#     num_mono = molecule_embeddings.shape[0]
+
+#     if method == 'avg':
+#         mixture_embedding = molecule_embeddings.mean(axis=0)
+#     elif method == 'sum':
+#         mixture_embedding = molecule_embeddings.sum(axis=0)
+#     elif method == 'max':
+#         mixture_embedding = molecule_embeddings.max(axis=0)
+#     elif method == 'log':
+#         if beta is None:
+#             exp_embeddings = np.exp(molecule_embeddings)
+#             summed = np.sum(exp_embeddings, axis=0)
+#             mixture_embedding = np.log(summed)
+#         else:
+#             mixture_embedding = log_sum_exp_beta(molecule_embeddings, beta)
+#     elif method == 'geometric':
+#         product = np.prod(molecule_embeddings, axis=0)
+#         mixture_embedding = np.power(product, 1 / molecule_embeddings.shape[0])
+#     else:
+#         raise ValueError(f"Invalid method: {method}")
+
+#     return mixture_embedding, (num_mono, CIDs)
+
+
+# def log_sum_exp_beta(molecule_embeddings, beta):
+#     exp_embeddings = np.exp(beta * molecule_embeddings)
+#     summed = np.sum(exp_embeddings, axis=0)
+#     mixture_embedding = (1 / beta) * np.log(summed)
+#     return mixture_embedding
+
+
+
 def combine_molecules(label, dataset, mixtures_IDs, CID2features, method='avg', beta=None):
     """
     Return mixture embedding vector, and summary stats
@@ -24,29 +62,34 @@ def combine_molecules(label, dataset, mixtures_IDs, CID2features, method='avg', 
     num_mono = molecule_embeddings.shape[0]
 
     if method == 'avg':
-        mixture_embedding = molecule_embeddings.mean(axis=0)
+        mixture_embedding = np.nanmean(molecule_embeddings, axis=0)
     elif method == 'sum':
-        mixture_embedding = molecule_embeddings.sum(axis=0)
+        mixture_embedding = np.nansum(molecule_embeddings, axis=0)
     elif method == 'max':
-        mixture_embedding = molecule_embeddings.max(axis=0)
+        mixture_embedding = np.nanmax(molecule_embeddings, axis=0)
     elif method == 'log':
         if beta is None:
             exp_embeddings = np.exp(molecule_embeddings)
-            summed = np.sum(exp_embeddings, axis=0)
+            summed = np.nansum(exp_embeddings, axis=0)
             mixture_embedding = np.log(summed)
         else:
-            mixture_embedding = log_sum_exp_beta(molecule_embeddings, beta)
+            mixture_embedding = log_sum_exp_beta_nan(molecule_embeddings, beta)
     elif method == 'geometric':
-        product = np.prod(molecule_embeddings, axis=0)
-        mixture_embedding = np.power(product, 1 / molecule_embeddings.shape[0])
+        valid_indices = ~np.isnan(molecule_embeddings).any(axis=1)
+        valid_embeddings = molecule_embeddings[valid_indices]
+        product = np.prod(valid_embeddings, axis=0)
+        mixture_embedding = np.power(product, 1 / valid_embeddings.shape[0])
     else:
         raise ValueError(f"Invalid method: {method}")
 
     return mixture_embedding, (num_mono, CIDs)
 
-def log_sum_exp_beta(molecule_embeddings, beta):
+def log_sum_exp_beta_nan(molecule_embeddings, beta):
+    """
+    Calculate log-sum-exp with beta scaling, ignoring NaN values
+    """
     exp_embeddings = np.exp(beta * molecule_embeddings)
-    summed = np.sum(exp_embeddings, axis=0)
+    summed = np.nansum(exp_embeddings, axis=0)
     mixture_embedding = (1 / beta) * np.log(summed)
     return mixture_embedding
 

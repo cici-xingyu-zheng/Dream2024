@@ -409,6 +409,7 @@ Best XGBoost model:
 Hyperparameters: {'subsample': 1.0, 'n_estimators': 200, 'max_depth': 5, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
 Correlation: 0.9529037106728853
 RMSE: 0.06913543471060413
+
 RandomForest Average Performance:
 R mean: 0.5861330674695496
 R std: 0.01891364720827479
@@ -489,6 +490,7 @@ R mean: 0.5886324247242483
 R std: 0.008608744323636466
 RMSE mean: 0.1273736464326091
 RMSE std: 0.00047465891243791286
+
 XGBoost Average Performance:
 R mean: 0.6053602090478509
 R std: 0.006038072842999686

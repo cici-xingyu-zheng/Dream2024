@@ -1,0 +1,143 @@
+Starting 1th round reduction! 
+
+Number of features used now: 2564
+Random Forest - R: 0.428
+Random Forest - RMSE: 0.142
+
+Remove 164 of features;
+Left with 2400 features.
+
+Starting 2th round reduction! 
+
+Number of features used now: 2400
+Random Forest - R: 0.422
+Random Forest - RMSE: 0.142
+
+Remove 48 of features;
+Left with 2352 features.
+
+Starting 3th round reduction! 
+
+Number of features used now: 2352
+Random Forest - R: 0.422
+Random Forest - RMSE: 0.142
+
+Remove 38 of features;
+Left with 2314 features.
+
+Starting 4th round reduction! 
+
+Number of features used now: 2314
+Random Forest - R: 0.421
+Random Forest - RMSE: 0.142
+
+Remove 24 of features;
+Left with 2290 features.
+
+Starting 5th round reduction! 
+
+Number of features used now: 2290
+Random Forest - R: 0.430
+Random Forest - RMSE: 0.142
+
+Remove 6 of features;
+Left with 2284 features.
+
+Starting 6th round reduction! 
+
+Number of features used now: 2284
+Random Forest - R: 0.423
+Random Forest - RMSE: 0.142
+
+Remove 18 of features;
+Left with 2266 features.
+
+Starting 7th round reduction! 
+
+Number of features used now: 2266
+Random Forest - R: 0.425
+Random Forest - RMSE: 0.142
+
+Remove 6 of features;
+Left with 2260 features.
+
+Starting 8th round reduction! 
+
+Number of features used now: 2260
+Random Forest - R: 0.421
+Random Forest - RMSE: 0.142
+
+Remove 4 of features;
+Left with 2256 features.
+
+Starting 9th round reduction! 
+
+Number of features used now: 2256
+Random Forest - R: 0.429
+Random Forest - RMSE: 0.142
+
+Remove 14 of features;
+Left with 2242 features.
+
+Starting 10th round reduction! 
+
+Number of features used now: 2242
+Random Forest - R: 0.419
+Random Forest - RMSE: 0.142
+
+Remove 12 of features;
+Left with 2230 features.
+
+Starting 11th round reduction! 
+
+Number of features used now: 2230
+Random Forest - R: 0.424
+Random Forest - RMSE: 0.142
+
+Remove 4 of features;
+Left with 2226 features.
+
+Starting 12th round reduction! 
+
+Number of features used now: 2226
+Random Forest - R: 0.420
+Random Forest - RMSE: 0.142
+
+Remove 4 of features;
+Left with 2222 features.
+
+Starting 13th round reduction! 
+
+Number of features used now: 2222
+Random Forest - R: 0.421
+Random Forest - RMSE: 0.142
+
+Remove 6 of features;
+Left with 2216 features.
+
+Starting 14th round reduction! 
+
+Number of features used now: 2216
+Random Forest - R: 0.416
+Random Forest - RMSE: 0.142
+
+Remove 4 of features;
+Left with 2212 features.
+
+Starting 15th round reduction! 
+
+Number of features used now: 2212
+Random Forest - R: 0.423
+Random Forest - RMSE: 0.142
+
+Remove 4 of features;
+Left with 2208 features.
+
+Starting 16th round reduction! 
+
+Number of features used now: 2208
+Random Forest - R: 0.427
+Random Forest - RMSE: 0.142
+
+Remove 0 of features;
+Left with 2208 features.

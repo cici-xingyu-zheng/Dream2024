@@ -116,6 +116,7 @@ XGBoost - RMSE: 0.132
 		2. try reducing the dimension
 - we need to figure out some confusion matrix like things, that allow us to know which dataset perform worse
 	- Bushdid underperform consistently using different deepnose feature combinations
+- how to include identical?
 
 **Progress:**
 1. We plotted the deepnose features distribution, and found out that it looks more like log normal; therefore we try out log the features first then standard transform; results stand out from random seed; In the optimization round, the result is slightly better and more robust:
@@ -133,7 +134,7 @@ RMSE mean: 0.125260023134671
 RMSE std: 0.0006472561753324663
 ```
 
-2. Distance features:
+2. Distance features (TD;LR: doesn't work that well):
 
 For log distance, with random seed:
 ```
@@ -171,16 +172,70 @@ XGBoost - R: 0.538
 XGBoost - RMSE: 0.134
 ```
 
-We decided to stack the difference features and optimize over that. The mean performance is not as imporessive as expected so we will perhaps still use the concatinated features for now; to consider combining with Dragon features.
+We decided to stack the difference features and optimize over that. After optimization, the mean performance is not as imporessive as expected so we will perhaps still use the concatinated features for now; to consider combining with phsysicalchemical features.
+
+3. Tried out Mordred Descriptors (TD;LR: usable feature space; even better when combined with Deepnose features) 
+
+After fighting with the Dragon Descriptors that the Synapse website provided, that does not have enetries for all CIDs, see `Dragon_feagures.ipynb`, we decided to use Mordred, and have installed the module and produced the descriptpors ourselves. I've output the features as well, it's called `Mordred_features_in-house.csv`. 
+
+With Random seed, and log standard transformed, and averaging to create mixtures, training takes about 10 min.
+
+```
+Random Forest - R: 0.606
+Random Forest - RMSE: 0.125
+
+XGBoost - R: 0.557
+XGBoost - RMSE: 0.131
+```
+
+The mean abs. difference between prediction to true value:
+```
+Dataset
+Bushdid    0.103358
+Ravia      0.098455
+Snitz 1    0.084759
+Snitz 2    0.102151
+```
+Compared to using deepnose features, does better in Bushdid:
+```
+Dataset
+Bushdid    0.122663
+Ravia      0.098067
+Snitz 1    0.064842
+Snitz 2    0.073770
+```
+
+Stacked with Deepnose also log standard transformed, random seeds:
+
+```
+Random Forest - R: 0.622
+Random Forest - RMSE: 0.123
+
+XGBoost - R: 0.543
+XGBoost - RMSE: 0.134
+```
+
+With absolute diff:
+```
+Dataset
+Bushdid    0.118434
+Ravia      0.098279
+Snitz 1    0.066827
+Snitz 2    0.077048
+```
+
+Woohoo! For deepnose features, presumably their importance would be more evenly distributed.
+We would like to see if we can drop some of Mordred features, and if augmentation might work to exploit those feature spaces.
+
+4. Worked on a round of Feature reduction... successfully removed 178 Descriptors that consistently have feature importance < 0.0001; see `mordred_feature_reduction.py`.
+
+5. Identical augmentation (TD;LR: haven't got it to work)
 
 ---
 ## TO-DO:
 
-- create dimension wise difference features
-- why the `Dragon_Descriptors.csv` has 4000 feature dim? Snitz has 1300? Find out their 21 descriptors
 - try the Snitz normalization
 	- judge by the log standard deviation (some might be log normal distributed)
-- add identical molecules
 
 ### 05/24/24 Discussion with Sergey:
 
