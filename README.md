@@ -234,8 +234,14 @@ We would like to see if we can drop some of Mordred features, and if augmentatio
 ---
 ## TO-DO:
 
+- think about the relationship between the value obtained from different paradigm
+- try distance (1. difference both ways; 2. difference + average)
+- Mordred versions community: https://github.com/JacksonBurns/mordred-community
+- MLP or SVM regression uh
+- Try Morgan once Cyrille shared with me; Morgan + Leffingwell?
+- think about how to reduce dimensionality
+- intensity aided
 - try the Snitz normalization
-	- judge by the log standard deviation (some might be log normal distributed)
 
 ### 05/24/24 Discussion with Sergey:
 
