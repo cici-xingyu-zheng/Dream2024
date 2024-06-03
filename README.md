@@ -215,7 +215,7 @@ XGBoost - R: 0.543
 XGBoost - RMSE: 0.134
 ```
 
-With absolute diff:
+Absolute diff between pred and true:
 ```
 Dataset
 Bushdid    0.118434
