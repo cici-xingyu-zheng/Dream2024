@@ -232,8 +232,7 @@ We would like to see if we can drop some of Mordred features, and if augmentatio
 5. Identical augmentation (TD;LR: haven't got it to work)
 
 ### 06/04/24
-Try the intensity scaling.. might need to debug; doesn't seem to change a whole lot even the correlations?
-See if Modred will change anything; what are the expected values.
+Since the signmoid has a very long lagging period before it goes to 1, we might need to scale and systematically scale [60, 70, 80, 90, 95]
 
 ---
 ## TO-DO:
@@ -257,8 +256,6 @@ See if Modred will change anything; what are the expected values.
 	- added
 4. try Pearson as the creterion for the sake of it;
 	- don't think it make sense for decision trees..
-
-Figure out:
 
 
 ### 05/31/24 Extended Datasets:
