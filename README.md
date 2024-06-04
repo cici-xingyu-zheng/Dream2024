@@ -231,6 +231,10 @@ We would like to see if we can drop some of Mordred features, and if augmentatio
 
 5. Identical augmentation (TD;LR: haven't got it to work)
 
+### 06/04/24
+Try the intensity scaling.. might need to debug; doesn't seem to change a whole lot even the correlations?
+See if Modred will change anything; what are the expected values.
+
 ---
 ## TO-DO:
 
@@ -242,6 +246,7 @@ We would like to see if we can drop some of Mordred features, and if augmentatio
 - think about how to reduce dimensionality
 - intensity aided
 - try the Snitz normalization
+- Plot std by bootstrapping
 
 ### 05/24/24 Discussion with Sergey:
 
