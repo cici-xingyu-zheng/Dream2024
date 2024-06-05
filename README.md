@@ -232,9 +232,51 @@ We would like to see if we can drop some of Mordred features, and if augmentatio
 5. Identical augmentation (TD;LR: haven't got it to work)
 
 ### 06/04/24
-Since the signmoid has a very long lagging period before it goes to 1, we might need to scale and systematically scale [60, 70, 80, 90, 95]
+Since the signmoid has a very long lagging period before it goes to 1, we might need to scale and systematically scale (from 0.6 - 0.95)
+
+Optimization results:
+
+Best RF so far at scale = 6 (intensity assumed 0.6, in a 0-1 scale)
+```
+RandomForest Average Performance:
+R mean: 0.6276453974001096
+R std: 0.005341367310099413
+RMSE mean: 0.12417947362024453
+RMSE std: 0.0006251847416127161
+```
+
+Best XGB so far at scale = 6.5 (intensity assumed 0.65, in a 0-1 scale)
+```
+XGBoost Average Performance:
+R mean: 0.6308365798346898
+R std: 0.005496425576258286
+RMSE mean: 0.12391892164379108
+RMSE std: 0.0004695359298822691
+```
+
+From random seeds with the best RF hyperparameters:
+```
+Dataset
+Bushdid    0.125092
+Ravia      0.080492
+Snitz 1    0.065308
+Snitz 2    0.076263
+```
+It seems that intensity augmentation helped Ravia's deviation to be inproved; but not so much for the other datasets.
+
+We will try scaling from (.15 - .55) just in case we miss from the lower end.
+
+Seperate: 
+```
+Slope for Snitz 1: 1.489
+Slope for Snitz 2: 1.665
+Slope for Ravia: 1.607
+Slope for Bushdid: 1.403
+```
+x: y_pred y: y_true
 
 ---
+
 ## TO-DO:
 
 - think about the relationship between the value obtained from different paradigm
@@ -283,6 +325,7 @@ Column names.
 First it'd be great to have the `molecule_intensites` dataframe for the experiment 4 and 5 in Ravia 2020. I would imagine that it has the same columns as `extended_molecule_intensites` described above.
 
 - If two concentrations are used, they can each be a row of data.
+
 - **Discuss**: I am not sure how many experimental values are reported based on different `Experimental Type`, as the have their own rating task, they also did the triangular and the two-alternative same–different task — but we can figure this out together.
 
 Second, to extend the data to other Ravia experiments, it would be lovely to have:
