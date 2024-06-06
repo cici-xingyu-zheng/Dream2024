@@ -275,6 +275,7 @@ Slope for Bushdid: 1.403
 ```
 x: y_pred y: y_true
 
+Intensity augmentation has been implemented; but let's plot things and print things so that we know no mistakes are made, and then go from there.
 ---
 
 ## TO-DO:
