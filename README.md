@@ -298,12 +298,13 @@ Interestingly, when intensity = .2, vectors are very small in the overall scale 
 
 2. Seperately, the predicted value v.s. true always has a bigger slope than 1, e.g.: 
 ```
+### x: y_pred y: y_true
 Slope for Snitz 1: 1.489
 Slope for Snitz 2: 1.665
 Slope for Ravia: 1.607
 Slope for Bushdid: 1.403
 ```
-x: y_pred y: y_true
+
 
 
 3. Intensity augmentation has been implemented; but haven't plot things and print things so that we know no mistakes are made, and then go from there. 
