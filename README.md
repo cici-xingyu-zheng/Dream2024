@@ -232,12 +232,33 @@ We would like to see if we can drop some of Mordred features, and if augmentatio
 5. Identical augmentation (TD;LR: haven't got it to work)
 
 ### 06/04/24
-Since the signmoid has a very long lagging period before it goes to 1, we might need to scale and systematically scale (from 0.6 - 0.95)
+
+1. Intensity incoporation: 
+
+	- **brief explanation again**: Ravia's data's not intensity matched; but they provide an intensity score for each molecule in the mixture, 
+	and how to combine them, i.e. sum over the molecule with a weighing function based on the intensity:
+
+```
+weight = 1 / (1 + np.exp(-(x - alpha_int)/beta_int))
+```
+
+	- we used this formula to weigh for the Ravia data, and for Bushdid and Snitz, we optimize via varying **a fixed intensity weight** for all molecules.
+
+Since the signmoid has a very long lagging period before it goes to 1, we tried from 0.1 to 0.9. 
 
 Optimization results:
 
-Best RF so far at scale = 6 (intensity assumed 0.6, in a 0-1 scale)
-```
+Best RF so far at intensity assumed around 0.6 and 0.2, in a 0-1 scale:
+
+``` 
+### intensity = 0.2:
+RandomForest Average Performance:
+R mean: 0.6375006086735041
+R std: 0.006451750966573196
+RMSE mean: 0.12165413362153225
+RMSE std: 0.00047790539465141906
+
+### intensity = 0.6:
 RandomForest Average Performance:
 R mean: 0.6276453974001096
 R std: 0.005341367310099413
@@ -245,8 +266,17 @@ RMSE mean: 0.12417947362024453
 RMSE std: 0.0006251847416127161
 ```
 
+
 Best XGB so far at scale = 6.5 (intensity assumed 0.65, in a 0-1 scale)
 ```
+### intensity = 0.25:
+XGBoost Average Performance:
+R mean: 0.6266051980823658
+R std: 0.0067376094337279245
+RMSE mean: 0.12429576133057188
+RMSE std: 0.0007501798484626942
+
+### intensity = 0.65:
 XGBoost Average Performance:
 R mean: 0.6308365798346898
 R std: 0.005496425576258286
@@ -264,9 +294,9 @@ Snitz 2    0.076263
 ```
 It seems that intensity augmentation helped Ravia's deviation to be inproved; but not so much for the other datasets.
 
-We will try scaling from (.15 - .55) just in case we miss from the lower end.
+Interestingly, when intensity = .2, vectors are very small in the overall scale in Bushdid and Snitz compared to Ravia, but maybe we need to plot and look at them seperately. 
 
-Seperate: 
+2. Seperately, the predicted value v.s. true always has a bigger slope than 1, e.g.: 
 ```
 Slope for Snitz 1: 1.489
 Slope for Snitz 2: 1.665
@@ -275,20 +305,30 @@ Slope for Bushdid: 1.403
 ```
 x: y_pred y: y_true
 
-Intensity augmentation has been implemented; but let's plot things and print things so that we know no mistakes are made, and then go from there.
+
+3. Intensity augmentation has been implemented; but haven't plot things and print things so that we know no mistakes are made, and then go from there. 
+But the overall impression is that it doesn't perform as well but not bad either. We haven't optimized anything yet.
+
+
+Some conclusion is that without augmentation, the performance including intensity has been the best so far (RF; R =.6375), but without augmentating with other Ravia dataset; but we don't know if it helps in the actual testing data yet.
+
+My thoughts is that there are two seperate things we can try as another attempt to combine Deepnose and physical chemical:
+
+- First, find a relatively low Mordred dimension that is more or less on par with Deepnose;
+- Second, combine Morgan fingerprint with leffingwell: which are both sparse data.
+
 
 ---
 
 ## TO-DO:
 
 - think about the relationship between the value obtained from different paradigm
-- try distance (1. difference both ways; 2. difference + average)
+- Try distance (1. difference both ways; 2. difference + average)
+	- tried the difference both ways.
 - Mordred versions community: https://github.com/JacksonBurns/mordred-community
-- MLP or SVM regression uh
-- Try Morgan once Cyrille shared with me; Morgan + Leffingwell?
-- think about how to reduce dimensionality
-- intensity aided
-- try the Snitz normalization
+- MLP or SVM regression 
+- Try Morgan once Cyrille shared with me Morgan + Leffingwell? Or others could try it too. But need to think about how to reduce dimensionality
+- Try the Snitz normalization
 - Plot std by bootstrapping
 
 ### 05/24/24 Discussion with Sergey:
@@ -332,10 +372,10 @@ First it'd be great to have the `molecule_intensites` dataframe for the experime
 
 Second, to extend the data to other Ravia experiments, it would be lovely to have:
 
-1. experiment 1
-2. experiment 2
+1. experiment 1 
+2. experiment 2 :white_check_mark:
 3. experiment 3, the perfume one (if the CIDs are available)
-4. experiment 6
+4. experiment 6 :white_check_mark:
 
 
 
