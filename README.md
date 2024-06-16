@@ -318,6 +318,10 @@ My thoughts is that there are two seperate things we can try as another attempt 
 - First, find a relatively low Mordred dimension that is more or less on par with Deepnose;
 - Second, combine Morgan fingerprint with leffingwell: which are both sparse data.
 
+### 06/15/24
+
+1. we will copy the directory to GPU and run a MLP there; to do a quick comparision
+2. we subsampled the potential augmentation based on whether samples share mono molecules with the original training set
 
 ---
 

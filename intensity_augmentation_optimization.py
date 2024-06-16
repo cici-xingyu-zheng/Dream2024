@@ -1,3 +1,6 @@
+### 06/10/23
+# not done bc the current optimization code cannot handle augmented features yet; to treat augmented data seperately.
+
 import os
 import sys
 
@@ -150,4 +153,3 @@ X_features_extended = np.hstack((X_extended, np.array(distances_e).reshape(220, 
                         data_arr_e
                         ))
 
-### not done bc the current optimization code cannot handle augmented features yet.
