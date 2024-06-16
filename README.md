@@ -320,8 +320,22 @@ My thoughts is that there are two seperate things we can try as another attempt 
 
 ### 06/15/24
 
-1. we will copy the directory to GPU and run a MLP there; to do a quick comparision
-2. we subsampled the potential augmentation based on whether samples share mono molecules with the original training set
+1. we ran an MLP and a SVR; to do a quick comparision
+2. we subsampled the potential augmentation based on whether samples share mono molecules with the original training set; the average performance is not better; but more estimators (> 200 might help?) as we have more samples.
+
+```
+Random Forest Average Performance:
+R mean: 0.6343168195209042
+R std: 0.005635839804085785
+RMSE mean: 0.12198357360915224
+RMSE std: 0.0004758279324259476
+
+XGBoost Average Performance:
+R mean: 0.5835291550334958
+R std: 0.016703216536849495
+RMSE mean: 0.12677969614763263
+RMSE std: 0.002275026499832646
+```
 
 ---
 

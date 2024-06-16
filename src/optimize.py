@@ -19,7 +19,7 @@ def para_search(seed, X, y_true):
     }
 
     xgb_param_dist = {
-        'n_estimators': [50, 100, 200],
+        'n_estimators': [50, 100, 200, 250],
         'max_depth': [3, 5, 7, 9],
         'learning_rate': [0.01, 0.1, 0.3],
         'subsample': [0.5, 0.7, 1.0],
