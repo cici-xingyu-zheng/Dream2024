@@ -323,7 +323,7 @@ My thoughts is that there are two seperate things we can try as another attempt 
 1. we ran an MLP and a SVR; to do a quick comparision
 2. we subsampled the potential augmentation based on whether samples share mono molecules with the original training set; the average performance is not better; but more estimators (> 200 might help?) as we have more samples.
 
-```
+``` 
 Random Forest Average Performance:
 R mean: 0.6343168195209042
 R std: 0.005635839804085785
@@ -337,6 +337,19 @@ RMSE mean: 0.12677969614763263
 RMSE std: 0.002275026499832646
 ```
 
+``` # increase the serach for # of estimators
+Random Forest Average Performance:
+R mean: 0.6365621082108206
+R std: 0.005377960512535479
+RMSE mean: 0.12176980392680141
+RMSE std: 0.0006470437287955823
+
+XGBoost Average Performance:
+R mean: 0.5835179973193518
+R std: 0.01683486714022818
+RMSE mean: 0.12679213018645616
+RMSE std: 0.002315536795866572
+```
 ---
 
 ## TO-DO:

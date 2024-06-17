@@ -1,0 +1,17 @@
+Best Random Forest Hyperparameters:
+{'n_estimators': 250, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': 30, 'bootstrap': True}
+
+Best XGBoost Hyperparameters:
+{'subsample': 0.5, 'n_estimators': 500, 'max_depth': 9, 'learning_rate': 0.1, 'colsample_bytree': 0.5}
+
+Random Forest Average Performance:
+R mean: 0.6365621082108206
+R std: 0.005377960512535479
+RMSE mean: 0.12176980392680141
+RMSE std: 0.0006470437287955823
+
+XGBoost Average Performance:
+R mean: 0.5835179973193518
+R std: 0.01683486714022818
+RMSE mean: 0.12679213018645616
+RMSE std: 0.002315536795866572
