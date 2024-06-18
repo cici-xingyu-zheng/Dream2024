@@ -350,6 +350,44 @@ R std: 0.01683486714022818
 RMSE mean: 0.12679213018645616
 RMSE std: 0.002315536795866572
 ```
+
+### 06/18/24
+Deepnose with not-reduced Mordred:
+```
+# Random seed:
+Random Forest - R: 0.622
+Random Forest - RMSE: 0.123
+
+# Optimized:
+RandomForest Average Performance:
+R mean: 0.6269922739474505
+R std: 0.009665706205459547
+RMSE mean: 0.12240838858892829
+RMSE std: 0.0012340442648023965
+```
+
+Deepnose with reduced Mordred:
+```
+# Random seed:
+Random Forest - R: 0.617
+Random Forest - RMSE: 0.124
+
+# Optimized:
+RandomForest Average Performance:
+R mean: 0.6312683272761064
+R std: 0.008293668435681693
+RMSE mean: 0.12391256611746541
+RMSE std: 0.0004982968418171625
+
+XGBoost Average Performance: # XGB also performes pretty well!
+R mean: 0.6317021124916241
+R std: 0.005763772259870198
+RMSE mean: 0.1223166036600456
+RMSE std: 0.00044259352066136496
+```
+
+We haven't had the intensity scaled features yet. But next we can try to scale the stacked features with intensity.
+
 ---
 
 ## TO-DO:
