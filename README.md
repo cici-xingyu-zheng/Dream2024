@@ -386,7 +386,23 @@ RMSE mean: 0.1223166036600456
 RMSE std: 0.00044259352066136496
 ```
 
-We haven't had the intensity scaled features yet. But next we can try to scale the stacked features with intensity.
+Scale the stacked features with intensity; with distance, cosyne sim, and angle calculated seperately for deepnose and reduced dim mordred:
+
+```
+RandomForest Average Performance:
+R mean: 0.6392017624024392
+R std: 0.006384713497650123
+RMSE mean: 0.12066172317965651
+RMSE std: 0.0008327914020346979
+
+XGBoost Average Performance:
+R mean: 0.6416206117007875
+R std: 0.004993599179229569
+RMSE mean: 0.12002062605743546
+RMSE std: 0.0004988276960423697
+```
+
+We uploaded the features of Mordred, original (without imputation for NaN yet, but in ourprojection we used mean) and the reduced dim. Mordred to dropbox.
 
 ---
 
