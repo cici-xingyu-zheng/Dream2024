@@ -389,11 +389,17 @@ RMSE std: 0.00044259352066136496
 Scale the stacked features with intensity; with distance, cosyne sim, and angle calculated seperately for deepnose and reduced dim mordred:
 
 ```
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 400, 'min_samples_split': 2, 'max_features': 'auto', 'max_depth': 20, 'bootstrap': True}
+
 RandomForest Average Performance:
 R mean: 0.6392017624024392
 R std: 0.006384713497650123
 RMSE mean: 0.12066172317965651
 RMSE std: 0.0008327914020346979
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 500, 'max_depth': 7, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
 
 XGBoost Average Performance:
 R mean: 0.6416206117007875
@@ -401,6 +407,7 @@ R std: 0.004993599179229569
 RMSE mean: 0.12002062605743546
 RMSE std: 0.0004988276960423697
 ```
+
 
 We uploaded the features of Mordred, original (without imputation for NaN yet, but in ourprojection we used mean) and the reduced dim. Mordred to dropbox.
 
