@@ -352,7 +352,19 @@ RMSE std: 0.002315536795866572
 ```
 
 ### 06/18/24
-Deepnose with not-reduced Mordred:
+The most recent idea we carried out was to have a lower-D physical-chemical feature set, that is relative same size scale as deepnose, instead of 10 times of it. First we thought SVD would do, but I very quickly realize that SVD low rank will give us the same dim back but just with a lower rank. So we decided to do a PCA on the covariance matrix of `X` being 161 x 1282 (# molecule, # features), `C = (1 / (n-1)) * (X^T * X)`, and do PCA on it (C is square matrix of dim. # of features). Say we select the top `k` principal components of the evectors, which has dim (1282 x k), and call it the projection matrix `P`. and then we get back the reduced feature matrix `X_reduced = X.matmul(P)`. We tried it on k = 96, being the same dim as Deepnose features, and the variance captured is about 100% of the original features.
+
+Below are some comparison of performance:
+
+
+1. Reduced Mordred alone: 
+```
+# Random seed:
+Random Forest - R: 0.595
+Random Forest - RMSE: 0.126
+```
+
+2. Deepnose with not-reduced Mordred:
 ```
 # Random seed:
 Random Forest - R: 0.622
@@ -366,7 +378,7 @@ RMSE mean: 0.12240838858892829
 RMSE std: 0.0012340442648023965
 ```
 
-Deepnose with reduced Mordred:
+3. Deepnose with reduced Mordred:
 ```
 # Random seed:
 Random Forest - R: 0.617
@@ -379,14 +391,14 @@ R std: 0.008293668435681693
 RMSE mean: 0.12391256611746541
 RMSE std: 0.0004982968418171625
 
-XGBoost Average Performance: # XGB also performes pretty well!
+XGBoost Average Performance: # XGB also performs pretty well!
 R mean: 0.6317021124916241
 R std: 0.005763772259870198
 RMSE mean: 0.1223166036600456
 RMSE std: 0.00044259352066136496
 ```
 
-Scale the stacked features with intensity; with distance, cosyne sim, and angle calculated seperately for deepnose and reduced dim mordred:
+4. Scale the stacked features with intensity; with distance, cosyne sim, and angle calculated seperately for deepnose and reduced dim mordred:
 
 ```
 Best Random Forest model:
@@ -408,8 +420,11 @@ RMSE mean: 0.12002062605743546
 RMSE std: 0.0004988276960423697
 ```
 
+This is exciting as it is with intensity and feature combo we beat our previous performaces. We can also explore different lower D. 
 
 We uploaded the features of Mordred, original (without imputation for NaN yet, but in ourprojection we used mean) and the reduced dim. Mordred to dropbox.
+
+We will create a table now to record the inching up.
 
 ---
 
