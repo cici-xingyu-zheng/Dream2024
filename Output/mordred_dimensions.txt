@@ -1,0 +1,89 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Try out Modred projection dim:  50
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 300, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': True}
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 400, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+
+RandomForest Average Performance:
+R mean: 0.6361315821348607
+R std: 0.005611489363148946
+RMSE mean: 0.12319413135660082
+RMSE std: 0.0006204598935051812
+
+XGBoost Average Performance:
+R mean: 0.6284090574018213
+R std: 0.011216657438751129
+RMSE mean: 0.12207432447967184
+RMSE std: 0.0009150682010857928
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Try out Modred projection dim:  96
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 250, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': 20, 'bootstrap': True}
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.5, 'n_estimators': 300, 'max_depth': 7, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9785841587784578
+
+RandomForest Average Performance:
+R mean: 0.6312683272761064
+R std: 0.008293668435681693
+RMSE mean: 0.12391256611746541
+RMSE std: 0.0004982968418171625
+
+XGBoost Average Performance:
+R mean: 0.6317021124916241
+R std: 0.005763772259870198
+RMSE mean: 0.1223166036600456
+RMSE std: 0.00044259352066136496
+
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 5, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9634028800717618
+RMSE: 0.06113876275457998
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 200, 'max_depth': 9, 'learning_rate': 0.1, 'colsample_bytree': 0.7}
+Correlation: 0.9999975579214764
+RMSE: 0.0003711582870298724
+
+RandomForest Average Performance:
+R mean: 0.63188127357106
+R std: 0.00469609663166561
+RMSE mean: 0.12426462065498153
+RMSE std: 0.0002826423050538626
+
+XGBoost Average Performance:
+R mean: 0.5990755275940595
+R std: 0.0185704912290654
+RMSE mean: 0.12562916708785526
+RMSE std: 0.001571767698783617
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Try out Modred projection dim:  162
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 5, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 200, 'max_depth': 9, 'learning_rate': 0.1, 'colsample_bytree': 0.7}
+
+RandomForest Average Performance:
+R mean: 0.63188127357106
+R std: 0.00469609663166561
+RMSE mean: 0.12426462065498153
+RMSE std: 0.0002826423050538626
+
+XGBoost Average Performance:
+R mean: 0.5990755275940595
+R std: 0.0185704912290654
+RMSE mean: 0.12562916708785526
+RMSE std: 0.001571767698783617
+
+
+----------------------------------------------
