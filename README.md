@@ -430,7 +430,6 @@ We will create a table now to record the inching up.
 
 1. we will do the with scaling and without scaling; and a code that test the best param combo's per data mean RSME and R. 
 2. we will write a first code that uses sparse input
-
 ---
 
 ## TO-DO:

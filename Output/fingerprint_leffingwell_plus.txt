@@ -1,0 +1,74 @@
+Random search for best hyperparams: round 1 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 200, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 0.5, 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9655098966493667
+RMSE: 0.05154205045378513
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'reg_lambda': 0.1, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 3, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 1.0}
+Correlation: 0.9933927629559159
+RMSE: 0.0279981477205252
+
+RandomForest Average Performance:
+R mean: 0.628088842225359
+R std: 0.00836773669673478
+RMSE mean: 0.12181263356325853
+RMSE std: 0.0008978383359027343
+
+XGBoost Average Performance:
+R mean: 0.6341746078971953
+R std: 0.01101280532498795
+RMSE mean: 0.12095850276555123
+RMSE std: 0.0013617316882048715
+
+Random search for best hyperparams: round 2 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 300, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 0.5, 'max_depth': 20, 'bootstrap': True}
+Correlation: 0.946089060926598
+RMSE: 0.06099353248755532
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'reg_lambda': 0.1, 'reg_alpha': 0.1, 'n_estimators': 300, 'min_child_weight': 1, 'max_depth': 3, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.8283157494488858
+RMSE: 0.09696019883833012
+
+RandomForest Average Performance:
+R mean: 0.633354897042629
+R std: 0.009194099930218618
+RMSE mean: 0.12127199271301684
+RMSE std: 0.0008943203006037969
+
+XGBoost Average Performance:
+R mean: 0.6110804132735784
+R std: 0.008237194742983856
+RMSE mean: 0.12475306379306221
+RMSE std: 0.0006885751633856214
+
+Random search for best hyperparams: round 3 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 100, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 0.5, 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9302990377246038
+RMSE: 0.06694466293456668
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'reg_lambda': 0, 'reg_alpha': 0, 'n_estimators': 200, 'min_child_weight': 3, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9585997312544484
+RMSE: 0.06456595090821415
+
+RandomForest Average Performance:
+R mean: 0.630953875122921
+R std: 0.011570592227856873
+RMSE mean: 0.12151188335333236
+RMSE std: 0.0013283364340481668
+
+XGBoost Average Performance:
+R mean: 0.6335059945925315
+R std: 0.010584324458929522
+RMSE mean: 0.12207859177650467
+RMSE std: 0.0010267337921076
+
+
+----------------------------------------------
