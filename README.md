@@ -337,7 +337,8 @@ RMSE mean: 0.12677969614763263
 RMSE std: 0.002275026499832646
 ```
 
-``` # increase the serach for # of estimators
+``` 
+# increase the serach for # of estimators
 Random Forest Average Performance:
 R mean: 0.6365621082108206
 R std: 0.005377960512535479
