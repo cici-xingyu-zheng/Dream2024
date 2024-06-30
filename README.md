@@ -449,12 +449,26 @@ We will create a table now to record the inching up.
 | Dragon normalized + DN |  0.617   | 0.124 | 296 + 96     |
 
 Note that for all selected features, we also post process normalize it. Feature dimension is before engineering. 
-From the results, it seems that 1. Mordred itself contains more information, but Dragon when combined with Deepnose works pretty well too.
+From the results, it seems that 
+-  Mordred itself contains more information than Dragon, but Dragon when combined with Deepnose works pretty well too.
+-  Stacking with Deepnose features helps, the best performance is on par with feature projection on a rough look.
+
 We furthur try out `Dragon + Modred normalized + DN` just as this has out performed, we got `R = 0.614` and `RMSE = 0.124`, so overall okay. 
 
+Optimization is underway...
+
 2. Fix the CID 
+	- Done; the correction happens for mixing, so does not affect too much the rest of the code;
+
 3. Try out leaderboard
-4. Write stacking code
+	- First attempt is on Model 9; 
+		- Use KNN imputation for `Dataset` feature 
+```
+Random Forest - R: 0.709
+Random Forest - RMSE: 0.121
+```
+
+4. Write stacking code (to-do)
 
 ------
 
