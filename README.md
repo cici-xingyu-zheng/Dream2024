@@ -433,7 +433,22 @@ We will create a table now to record the inching up.
 2. we will write a first code that uses sparse input
 3. forgot to do what Alex said about SVD projection.
 
----
+### 06/30/24
+
+1. Try out the selected features Cyrille has produced (random seed, not optimized)
+
+| Features               |    R     | RMSE  |
+| :--------------------- | :------  | :---- |
+| Mordred                |   True   | 23.99 |
+| Dragon                 |   True   | 23.99 |
+| Mordred normalized     |  False   | 19.99 |
+| Dragon normalized      |  False   | 19.99 |
+| Mordred + Deepnose     |   True   | 23.99 |
+| Dragon + Deepnose      |   True   | 23.99 |
+| Mordred normalized + DN|  False   | 19.99 |
+| Dragon normalized + DN |  False   | 19.99 |
+
+------
 
 ## TO-DO:
 
