@@ -437,16 +437,24 @@ We will create a table now to record the inching up.
 
 1. Try out the selected features Cyrille has produced (random seed, not optimized)
 
-| Features               |    R     | RMSE  |
-| :--------------------- | :------  | :---- |
-| Mordred                |   True   | 23.99 |
-| Dragon                 |   True   | 23.99 |
-| Mordred normalized     |  False   | 19.99 |
-| Dragon normalized      |  False   | 19.99 |
-| Mordred + Deepnose     |   True   | 23.99 |
-| Dragon + Deepnose      |   True   | 23.99 |
-| Mordred normalized + DN|  False   | 19.99 |
-| Dragon normalized + DN |  False   | 19.99 |
+| Features               |    R     | RMSE  |  Feature Dim |
+| :--------------------- | :------  | :---- | :----------  |
+| Mordred                |  0.599   | 0.126 | 70           |
+| Dragon                 |  0.573   | 0.128 | 31           |
+| Mordred normalized     |  0.603   | 0.125 | 77           |
+| Dragon normalized      |  0.575   | 0.128 | 296          |
+| Mordred + Deepnose     |  0.608   | 0.125 | 70 + 96      |
+| Dragon + Deepnose      |  0.620   | 0.123 | 31 + 96      |
+| Mordred normalized + DN|  0.617   | 0.124 | 77 + 96      |
+| Dragon normalized + DN |  0.617   | 0.124 | 296 + 96     |
+
+Note that for all selected features, we also post process normalize it. Feature dimension is before engineering. 
+From the results, it seems that 1. Mordred itself contains more information, but Dragon when combined with Deepnose works pretty well too.
+We furthur try out `Dragon + Modred normalized + DN` just as this has out performed, we got `R = 0.614` and `RMSE = 0.124`, so overall okay. 
+
+2. Fix the CID 
+3. Try out leaderboard
+4. Write stacking code
 
 ------
 
