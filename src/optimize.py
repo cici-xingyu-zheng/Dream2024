@@ -2,7 +2,7 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split, KFold, RandomizedSearchCV
 
-from src.utils import *
+from utils import *
 import xgboost as xgb
 
 # n_iter = 100
