@@ -455,7 +455,7 @@ From the results, it seems that
 
 We furthur try out `Dragon + Modred normalized + DN` just as this has out performed, we got `R = 0.614` and `RMSE = 0.124`, so overall okay. 
 
-Optimization Results: Dragon/Mordred/Mordred normalized + Deepnose have on average > 0.63 performance.
+Optimization Results: Dragon/Mordred/Mordred normalized + Deepnose have on average > 0.63 performance; see `performace_summary.xlsx` for details.
 
 2. Fix the CID 
 	- Done; the correction happens for mixing, so does not affect too much the rest of the code;
