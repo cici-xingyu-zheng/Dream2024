@@ -15,7 +15,6 @@ import xgboost as xgb
 
 input_path = 'Data/'
 
-
 feature_file_a = f'Fingerprints/Morgan_Fingerprints_Frequency_Size50.csv'
 feature_file_b = f'Fingerprints/TopologicalTorsions_Fingerprints_Frequency_Size50.csv'
 features_file_2 =  'leffingwell_features.npy'

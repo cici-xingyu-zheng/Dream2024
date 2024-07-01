@@ -463,7 +463,8 @@ Optimization Results: Dragon/Mordred/Mordred normalized + Deepnose have on avera
 3. Try out leaderboard, the procedure we took was to just use 10 model prediction's average:
 	- First attempt is on Model 9; 
 		- Use KNN imputation for `Dataset` feature 
-		
+		- What are the imputed values?
+
 ```
 Random Forest - R: 0.712
 Random Forest - RMSE: 0.121
@@ -475,7 +476,7 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 
 ## TO-DO:
 **Priority**:
-1. code for making feature generation and stacking more compact for testing
+1. code for making feature generation and stacking more compact for testing 
 2. mix and match 
 3. record performance comprehensively and carry out leaderboard testing
 
