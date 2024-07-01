@@ -111,7 +111,7 @@ for feature_choice in selected_choices:
 
     n_folds = 10
 
-    seeds = [0] # save time
+    seeds = [1, 2, 3] # save time
     for seed in seeds: 
         print(f"Random search for best hyperparams: round {seed +1} \n")
         rf_best,rbg_best = para_search(seed, X_features, y_true)

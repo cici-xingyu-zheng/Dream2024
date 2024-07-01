@@ -455,26 +455,32 @@ From the results, it seems that
 
 We furthur try out `Dragon + Modred normalized + DN` just as this has out performed, we got `R = 0.614` and `RMSE = 0.124`, so overall okay. 
 
-Optimization is underway...
+Optimization Results: Dragon/Mordred/Mordred normalized + Deepnose have on average > 0.63 performance.
 
 2. Fix the CID 
 	- Done; the correction happens for mixing, so does not affect too much the rest of the code;
 
-3. Try out leaderboard
+3. Try out leaderboard:
 	- First attempt is on Model 9; 
 		- Use KNN imputation for `Dataset` feature 
 ```
-Random Forest - R: 0.709
+Random Forest - R: 0.712
 Random Forest - RMSE: 0.121
 ```
-
-4. Write stacking code (to-do)
+REALIZED THAT THE ONE-HOT ENCODING WAS IMPLEMENTED WRONGLY!!! Fixed now; will fix for new code.
 
 ------
 
-## TO-DO:
 
-- think about the relationship between the value obtained from different paradigm
+## TO-DO:
+**Priority**:
+1. code for making feature generation and stacking more compact for testing
+2. mix and match
+
+
+**Prvious left**: 
+
+- The relationship between the value obtained from different paradigm
 - Try distance (1. difference both ways; 2. difference + average)
 	- tried the difference both ways.
 - Mordred versions community: https://github.com/JacksonBurns/mordred-community
@@ -482,6 +488,7 @@ Random Forest - RMSE: 0.121
 - Try Morgan once Cyrille shared with me Morgan + Leffingwell? Or others could try it too. But need to think about how to reduce dimensionality
 - Try the Snitz normalization
 - Plot std by bootstrapping
+- Projection using SVD 
 
 ### 05/24/24 Discussion with Sergey:
 
