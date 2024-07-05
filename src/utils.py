@@ -202,3 +202,4 @@ def combine_molecules_intensity_weighed(label, dataset, mixtures_IDs, CID2featur
     mixture_embedding = np.nansum(molecule_embeddings, axis=0)
     
     return mixture_embedding
+

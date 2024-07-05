@@ -471,6 +471,10 @@ Random Forest - RMSE: 0.121
 ```
 Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 
+### 07/05/24:
+1. Realized that we never optimize the same way for Deepnose + unreduced Mordred. Doing that..
+2. Is there a way actually, to diversify XGB performance as it is gradient based?
+3. Finish wrapping the testing functions; haven't started leaderboard testing yet.
 ------
 
 
