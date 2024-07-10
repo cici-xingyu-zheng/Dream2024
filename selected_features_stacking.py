@@ -34,16 +34,14 @@ for feature_choice in selected_choices:
     CID_file = 'molecules_train_cid.npy'
 
     # Read all copies, before and after correction; before was also downloaded from Dropbox.
-    mixture_file = 'Mixure_Definitions_Training_set.csv' 
+    mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
 
     training_task_file = 'TrainingData_mixturedist.csv'
 
-    # Mordred features
     features = pd.read_csv(os.path.join(input_path, features_file_1), index_col= 0)
     features_2 = np.load(os.path.join(input_path, features_file_2))
 
     features_CIDs = np.load(os.path.join(input_path, CID_file))
-
 
     # Training dataframe
     training_set = pd.read_csv(os.path.join(input_path, training_task_file))
@@ -54,24 +52,18 @@ for feature_choice in selected_choices:
     scaler = StandardScaler(with_mean=True, with_std=True)
 
     # standardize Mordred
-    features = scaler.fit_transform(features)
+    features_np = scaler.fit_transform(features)
+    features = pd.DataFrame(features_np, columns=features.columns, index=features.index)
+
     # log standardize deepnose
     epsilon = 1e-8 
     features_2 = scaler.fit_transform(np.log(features_2 + epsilon))
 
-    # Convert DataFrame to a numpy array
-    features_array = features
-
-    # Create an imputer object with mean strategy, can change later!!!
-    imputer = SimpleImputer(strategy='mean')
-    # Impute missing values
-    imputed_features = imputer.fit_transform(features_array)
-
     # Map CID to 96 dim features:
-    CID2features_mordred =  {CID: imputed_features[i] for i, CID in enumerate(features_CIDs)}
+    CID2features = {CID: np.array(features.loc[CID].tolist()) if CID in features.index else np.full(len(features.columns), np.nan) for CID in features_CIDs}
     CID2features_deepnose=  {CID: features_2[i] for i, CID in enumerate(features_CIDs)}
 
-    X_m, y, num_mixtures, all_pairs_CIDs = format_Xy(training_set,  mixtures_IDs, CID2features_mordred, method = 'avg')
+    X_m, y, num_mixtures, all_pairs_CIDs = format_Xy(training_set,  mixtures_IDs, CID2features, method = 'avg')
     X_d, _, _, _ = format_Xy(training_set,  mixtures_IDs, CID2features_deepnose, method = 'avg')
 
     # Convert the input pairs to a suitable format for training
@@ -111,7 +103,7 @@ for feature_choice in selected_choices:
 
     n_folds = 10
 
-    seeds = [1, 2, 3] # save time
+    seeds = [0, 1, 2] # save time
     for seed in seeds: 
         print(f"Random search for best hyperparams: round {seed +1} \n")
         rf_best,rbg_best = para_search(seed, X_features, y_true)

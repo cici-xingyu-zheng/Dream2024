@@ -475,6 +475,12 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 1. Realized that we never optimize the same way for Deepnose + unreduced Mordred. Doing that..
 2. Is there a way actually, to diversify XGB performance as it is gradient based?
 3. Finish wrapping the testing functions; haven't started leaderboard testing yet.
+
+- found out the mistake in selected features; corrected.
+
+4. Run in-house prepared Leaderboard testing for selected features; done!
+5. Optimize for Dragon + Mordred + Deepnose
+
 ------
 
 

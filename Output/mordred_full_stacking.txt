@@ -1,0 +1,68 @@
+Starting round : 0
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 200, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9701648133505372
+RMSE: 0.06063033683317026
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 400, 'max_depth': 7, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9941432108861753
+RMSE: 0.02467783548849694
+
+RandomForest Average Performance:
+R mean: 0.6035081494187474
+R std: 0.0064777487555157595
+RMSE mean: 0.12869674397506126
+RMSE std: 0.0004919946951352099
+
+XGBoost Average Performance:
+R mean: 0.6272802938198645
+R std: 0.008290343372998575
+RMSE mean: 0.12203363922017418
+RMSE std: 0.0008098749212164663
+
+Starting round : 1
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.954161215793828
+RMSE: 0.07082595745562142
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.5, 'n_estimators': 250, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9782645077686057
+RMSE: 0.05155570060469638
+
+RandomForest Average Performance:
+R mean: 0.6056643824026757
+R std: 0.008170429063028069
+RMSE mean: 0.12906480705491347
+RMSE std: 0.0005864448516181402
+
+XGBoost Average Performance:
+R mean: 0.6323777366958359
+R std: 0.004078630130568952
+RMSE mean: 0.12287042823571317
+RMSE std: 0.00044088973984515413
+
+Starting round : 2
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 150, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9709121491229743
+RMSE: 0.05846050785742165
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 1.0, 'n_estimators': 200, 'max_depth': 3, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+Correlation: 0.8612140614643686
+RMSE: 0.09584066869786619
+
+RandomForest Average Performance:
+R mean: 0.600307554866938
+R std: 0.007494707685116808
+RMSE mean: 0.1289037079179365
+RMSE std: 0.00032393164121905963
+
+XGBoost Average Performance:
+R mean: 0.5909820723036585
+R std: 0.009042234540462608
+RMSE mean: 0.12780788243954508
+RMSE std: 0.0009584175319005657

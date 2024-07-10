@@ -6,18 +6,18 @@ import numpy as np
 import pandas as pd
 import os
 
-from utils import *
+from src.utils import *
 
 
 # Below we add functions that streamline feature stacking and testing.
 
-input_path = '../Data/'
+input_path = 'Data/'
 
 CID_file = 'molecules_train_cid.npy'
 mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
 
 training_task_file = 'TrainingData_mixturedist.csv'
-test_task_file = 'Data/LeaderboardData_mixturedist.csv'
+test_task_file = 'Test/Data/LeaderboardData_mixturedist.csv'
 
 features_CIDs = np.load(os.path.join(input_path, CID_file))
 # Mapping helper files
@@ -30,13 +30,12 @@ training_set = pd.read_csv(os.path.join(input_path, training_task_file))
 test_set = pd.read_csv(test_task_file)
 
 
-def stacking_X_features(features_list, method):
+def stacking_X_features(CID2features_list, method):
 
     stacks = []
     
-    for features in features_list:
+    for CID2features in CID2features_list:
 
-        CID2features =  {CID: features[i] for i, CID in enumerate(features_CIDs)}
         X, y_true, num_mixtures, all_pairs_CIDs = format_Xy(training_set,  mixtures_IDs, CID2features, method = method)
         X_pairs = np.array([(np.concatenate((x1, x2))) for x1, x2 in X])
         
@@ -55,7 +54,7 @@ def stacking_X_features(features_list, method):
     diff_monos = [ len( set(pair[0]).difference(set(pair[1]))) for pair in all_pairs_CIDs]
     
     datasets = training_set['Dataset'].to_numpy()
-    # Returns the uniques in order of appearance
+    # Returns the uniques in the order of appearance
     desired_order = training_set['Dataset'].unique().tolist() 
     encoder = OneHotEncoder(categories=[desired_order])
     data_arr = encoder.fit_transform(datasets.reshape(-1, 1))
@@ -77,7 +76,7 @@ def stacking_X_features(features_list, method):
 def ensemble_models(X_features, y_true, param_best, type = 'rf', num_models = 10):
     models = []
     for i in range(num_models):
-        if type == 'rf':
+        if type == 'rf': 
             model = RandomForestRegressor(**param_best, random_state=i)
             model.fit(X_features, y_true)
         elif type == 'rgb':
@@ -86,13 +85,12 @@ def ensemble_models(X_features, y_true, param_best, type = 'rf', num_models = 10
         models.append(model)
     return models
 
-def stacking_X_test_features(features_list, X_train, method):
+def stacking_X_test_features(CID2features_list, X_train, method):
 
     stacks = []
     
-    for features in features_list:
+    for CID2features in CID2features_list:
 
-        CID2features =  {CID: features[i] for i, CID in enumerate(features_CIDs)}
         X, y_true, num_mixtures, all_pairs_CIDs = format_Xy(test_set,  mixtures_IDs, CID2features, method = method)
         X_pairs = np.array([(np.concatenate((x1, x2))) for x1, x2 in X])
         
@@ -129,7 +127,7 @@ def stacking_X_test_features(features_list, X_train, method):
     # Fit the imputer on the training data
     imputer.fit(X_train)
 
-    # Transform the training data and test data
+    # Transform the test data
     X_test = imputer.transform(X_features)
 
     return X_test, np.array(y_true)
