@@ -124,20 +124,53 @@ model_specs_2 = {
     30:{'CID2features_list':CID2features_list_m30, 'param':param_m30, 'method':'avg', 'model':'rgb'}
 }
 
-for key in model_specs_2.keys():
+
+CID2features_list_m31 = [CID2features_1a, CID2features_1b, CID2features_2] 
+CID2features_list_m32 = [CID2features_1a, CID2features_1b, CID2features_2] 
+
+param_m31 = {'n_estimators': 500, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': True}
+param_m32 = {'subsample': 0.7, 'n_estimators': 300, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+
+model_specs_3 = {
+    31:{'CID2features_list':CID2features_list_m31, 'param':param_m31, 'method':'avg', 'model':'rf'}, 
+    32:{'CID2features_list':CID2features_list_m32, 'param':param_m32, 'method':'avg', 'model':'rgb'}, 
+
+}
+
+
+# for key in model_specs_2.keys():
+#     print(f'Testing Model: M{key} \n')
+#     CID2features_list = model_specs_2[key]['CID2features_list']
+#     param = model_specs_2[key]['param']
+#     method =  model_specs_2[key]['method']
+#     model_type =  model_specs_2[key]['model']
+ 
+#     X_features, y_true = stacking_X_features(CID2features_list, method)
+#     models = ensemble_models(X_features, y_true, param, type = model_type, num_models = 10)
+#     X_test, y_test_true = stacking_X_test_features(CID2features_list,  X_features, method)
+#     y_pred_avg = pred_mean(models, X_test)
+#     rf_corr = np.corrcoef(y_pred_avg, y_test_true)[0, 1]
+#     rf_rmse = np.sqrt(mean_squared_error(np.array(y_test_true), y_pred_avg))
+
+#     print(f"{model_type} - R: {rf_corr:.3f}")
+#     print(f"{model_type} - RMSE: {rf_rmse:.3f}")
+#     print()
+
+for key in model_specs_3.keys():
+
     print(f'Testing Model: M{key} \n')
-    CID2features_list = model_specs_2[key]['CID2features_list']
-    param = model_specs_2[key]['param']
-    method =  model_specs_2[key]['method']
-    model_type =  model_specs_2[key]['model']
+    CID2features_list = model_specs_3[key]['CID2features_list']
+    param = model_specs_3[key]['param']
+    method =  model_specs_3[key]['method']
+    model_type =  model_specs_3[key]['model']
  
     X_features, y_true = stacking_X_features(CID2features_list, method)
     models = ensemble_models(X_features, y_true, param, type = model_type, num_models = 10)
     X_test, y_test_true = stacking_X_test_features(CID2features_list,  X_features, method)
     y_pred_avg = pred_mean(models, X_test)
-    rf_corr = np.corrcoef(y_pred_avg, y_test_true)[0, 1]
-    rf_rmse = np.sqrt(mean_squared_error(np.array(y_test_true), y_pred_avg))
+    corr = np.corrcoef(y_pred_avg, y_test_true)[0, 1]
+    rmse = np.sqrt(mean_squared_error(np.array(y_test_true), y_pred_avg))
 
-    print(f"Random Forest - R: {rf_corr:.3f}")
-    print(f"Random Forest - RMSE: {rf_rmse:.3f}")
+    print(f"{model_type} - R: {corr:.3f}")
+    print(f"{model_type} - RMSE: {rmse:.3f}")
     print()

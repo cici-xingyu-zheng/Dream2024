@@ -479,7 +479,8 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 - found out the mistake in selected features; corrected.
 
 4. Run in-house prepared Leaderboard testing for selected features; done!
-5. Optimize for Dragon + Mordred + Deepnose
+5. Optimize for Dragon + Mordred + Deepnose; done; not beating the current best
+6. For next week: varying the # of models (easy); train different best models (?)
 
 ------
 
