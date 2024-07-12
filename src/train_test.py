@@ -109,7 +109,6 @@ def stacking_X_test_features(CID2features_list, X_train, method):
     
     data_arr = np.full((len(test_set), 4), np.nan) 
 
-
     engineered_stack = np.hstack(
                         (np.array(shared_monos).reshape(46, 1), 
                         np.array(diff_monos).reshape(46, 1), 
