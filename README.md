@@ -488,6 +488,8 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 	- Nope it is actually pretty good; but I can imagine there might be way to get 5 differnet good-ish hyperparams, and average over them? Not sure if that will help...
 3. Whether using 10 RF models equals to get 10x the set number of trees? 
 	- Nope, with `bootstrap` set to be true, it's basically the same.
+4. Whether our models fit on the training data with a different performance? So that a weighted sum can be trained on them?
+	- 
 
 ------
 
