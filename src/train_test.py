@@ -2,22 +2,26 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import KNNImputer
 import xgboost as xgb
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.utils import resample
+
 import numpy as np
 import pandas as pd
 import os
 
 from src.utils import *
-
+# from utils import * // to call the modules from another folder, like Notebooks
 
 # Below we add functions that streamline feature stacking and testing.
 
 input_path = 'Data/'
+# input_path = '../Data/' // to call the modules from another folder
 
 CID_file = 'molecules_train_cid.npy'
 mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
 
 training_task_file = 'TrainingData_mixturedist.csv'
 test_task_file = 'Test/Data/LeaderboardData_mixturedist.csv'
+# test_task_file = '../Test/Data/LeaderboardData_mixturedist.csv' // to call the modules from another folder
 
 features_CIDs = np.load(os.path.join(input_path, CID_file))
 # Mapping helper files
@@ -83,6 +87,30 @@ def ensemble_models(X_features, y_true, param_best, type = 'rf', num_models = 10
             model = xgb.XGBRegressor(**param_best, random_state=i)
             model.fit(X_features, y_true)
         models.append(model)
+    return models
+
+
+def ensemble_models_with_bootstrap(X_features, y_true, param_best, type='rf', num_models=10, bootstrap_fraction=1):
+    models = []
+    n_samples = X_features.shape[0]
+    
+    for i in range(num_models):
+        # Perform bootstrapping
+        indices = resample(range(n_samples), n_samples=int(n_samples * bootstrap_fraction), replace=True, random_state=i)
+        X_bootstrap = X_features.iloc[indices] if hasattr(X_features, 'iloc') else X_features[indices]
+        y_bootstrap = y_true.iloc[indices] if hasattr(y_true, 'iloc') else y_true[indices]
+        
+        if type == 'rf':
+            model = RandomForestRegressor(**param_best, random_state=i)
+            model.fit(X_bootstrap, y_bootstrap)
+        elif type == 'rgb':
+            model = xgb.XGBRegressor(**param_best, random_state=i)
+            model.fit(X_bootstrap, y_bootstrap)
+        else:
+            raise ValueError("Invalid model type. Choose 'rf' or 'rgb'.")
+        
+        models.append(model)
+    
     return models
 
 def stacking_X_test_features(CID2features_list, X_train, method):

@@ -11,28 +11,31 @@ import os
 
 input_path = 'Data/'
 
-scaler = StandardScaler(with_mean=True, with_std=True)
 
 ## Group 1
 feature_file_1a = 'Mordred_reduced_features_50.npy'
 features_1a = np.load(os.path.join(input_path, feature_file_1a))
-features_1a = scaler.fit_transform(features_1a)
+scaler_1a = StandardScaler(with_mean=True, with_std=True)
+features_1a = scaler_1a.fit_transform(features_1a)
 CID2features_1a =  {CID: features_1a[i] for i, CID in enumerate(features_CIDs)}
 
 feature_file_1b = 'Mordred_reduced_features_96.npy'
 features_1b = np.load(os.path.join(input_path, feature_file_1b))
-features_1b = scaler.fit_transform(features_1b)
+scaler_1b = StandardScaler(with_mean=True, with_std=True)
+features_1b = scaler_1b.fit_transform(features_1b)
 CID2features_1b =  {CID: features_1b[i] for i, CID in enumerate(features_CIDs)}
 
 feature_file_1c = 'Mordred_reduced_features_162.npy'
 features_1c = np.load(os.path.join(input_path, feature_file_1c))
-features_1c= scaler.fit_transform(features_1c)
+scaler_1c = StandardScaler(with_mean=True, with_std=True)
+features_1c= scaler_1c.fit_transform(features_1c)
 CID2features_1c =  {CID: features_1c[i] for i, CID in enumerate(features_CIDs)}
 
 feature_file_2 = 'deepnose_features.npy'
 features_2 = np.load(os.path.join(input_path, feature_file_2))
 epsilon = 1e-8 
-features_2 = scaler.fit_transform(np.log(features_2 + epsilon))
+scaler_2 = StandardScaler(with_mean=True, with_std=True)
+features_2 = scaler_2.fit_transform(np.log(features_2 + epsilon))
 CID2features_2 =  {CID: features_2[i] for i, CID in enumerate(features_CIDs)}
 
 
@@ -61,18 +64,21 @@ sparse_2 = {CID: sparse_features_2[i] for i, CID in enumerate(features_CIDs)}
 ## Group 3
 selected_feature_file_1a = 'featureSelection/selection_cleanDragonDescriptors.csv'
 feature_1a = pd.read_csv(os.path.join(input_path, selected_feature_file_1a), index_col= 0)
+scaler = StandardScaler(with_mean=True, with_std=True)
 features_np = scaler.fit_transform(feature_1a)
 feature_1a = pd.DataFrame(features_np, columns=feature_1a.columns, index=feature_1a.index)
 CID2features_selected_1a = {CID: np.array(feature_1a.loc[CID].tolist()) if CID in feature_1a.index else np.full(len(feature_1a.columns), np.nan) for CID in features_CIDs}
 
 selected_feature_file_1b =  'featureSelection/selection_cleanMordredDescriptors.csv'
 feature_1b = pd.read_csv(os.path.join(input_path, selected_feature_file_1b), index_col= 0)
+scaler = StandardScaler(with_mean=True, with_std=True)
 features_np = scaler.fit_transform(feature_1b)
 feature_1b = pd.DataFrame(features_np, columns=feature_1b.columns, index=feature_1b.index)
 CID2features_selected_1b = {CID: np.array(feature_1b.loc[CID].tolist()) if CID in feature_1b.index else np.full(len(feature_1b.columns), np.nan) for CID in features_CIDs}
 
 selected_feature_file_1c =  'featureSelection/selection_cleanMordredDescriptorsNormalized.csv'
 feature_1c = pd.read_csv(os.path.join(input_path, selected_feature_file_1c), index_col= 0)
+scaler = StandardScaler(with_mean=True, with_std=True)
 features_np = scaler.fit_transform(feature_1c)
 feature_1c = pd.DataFrame(features_np, columns=feature_1c.columns, index=feature_1c.index)
 CID2features_selected_1c = {CID: np.array(feature_1c.loc[CID].tolist()) if CID in feature_1c.index else np.full(len(feature_1c.columns), np.nan) for CID in features_CIDs}
@@ -149,6 +155,8 @@ model_specs = {
 }
 
 
+
+
 for key in model_specs.keys():
     print(f'Testing Model: M{key} \n')
     CID2features_list = model_specs[key]['CID2features_list']
@@ -157,7 +165,7 @@ for key in model_specs.keys():
     model_type =  model_specs[key]['model']
  
     X_features, y_true = stacking_X_features(CID2features_list, method)
-    models = ensemble_models(X_features, y_true, param, type = model_type, num_models = 5)
+    models = ensemble_models(X_features, y_true, param, type = model_type, num_models = 10)
     X_test, y_test_true = stacking_X_test_features(CID2features_list,  X_features, method)
     y_pred_avg = pred_mean(models, X_test)
     corr = np.corrcoef(y_pred_avg, y_test_true)[0, 1]

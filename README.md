@@ -482,6 +482,13 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 5. Optimize for Dragon + Mordred + Deepnose; done; not beating the current best
 6. For next week: varying the # of models (easy, but does not seem to change the result to much; tried 5, 10, 20); train different best models (the easier way is to expand on the random search program)
 
+### 07/17/24:
+1. We tried out bootstrapping, that for each model used in ensemble, we randomly bootstrap 500 samples -- doesn't help with performance when we tested it; (on Model 11, ends up with smaller R and bigger RMSE)
+2. It seems that our random search isn't giving us the best generalizable performance; end of the day I might look into it
+	- Nope it is actually pretty good; but I can imagine there might be way to get 5 differnet good-ish hyperparams, and average over them? Not sure if that will help...
+3. Whether using 10 RF models equals to get 10x the set number of trees? 
+	- Nope, with `bootstrap` set to be true, it's basically the same.
+
 ------
 
 
