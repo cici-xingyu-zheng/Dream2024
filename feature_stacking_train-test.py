@@ -9,6 +9,7 @@ from sklearn.preprocessing import StandardScaler
 import os
 
 
+
 input_path = 'Data/'
 
 
@@ -132,26 +133,26 @@ param_m32 = {'subsample': 0.7, 'n_estimators': 300, 'max_depth': 9, 'learning_ra
 
 model_specs = {
     9:{'CID2features_list':CID2features_list_m9, 'param':param_m9, 'method':'avg', 'model':'rf'}, 
-    10:{'CID2features_list':CID2features_list_m10, 'param':param_m10, 'method':'avg', 'model':'rgb'}, 
+    10:{'CID2features_list':CID2features_list_m10, 'param':param_m10, 'method':'avg', 'model':'xgb'}, 
     11:{'CID2features_list':CID2features_list_m11, 'param':param_m11, 'method':'avg', 'model':'rf'}, 
-    12:{'CID2features_list':CID2features_list_m12, 'param':param_m12, 'method':'avg', 'model':'rgb'}, 
+    12:{'CID2features_list':CID2features_list_m12, 'param':param_m12, 'method':'avg', 'model':'xgb'}, 
     13:{'CID2features_list':CID2features_list_m13, 'param':param_m13, 'method':'avg', 'model':'rf'}, 
 
     20:{'CID2features_list':CID2features_list_m20, 'param':param_m20, 'method':'sum', 'model':'rf'}, 
     21:{'CID2features_list':CID2features_list_m21, 'param':param_m21, 'method':'sum', 'model':'rf'}, 
-    22:{'CID2features_list':CID2features_list_m22, 'param':param_m22, 'method':'sum', 'model':'rgb'}, 
+    22:{'CID2features_list':CID2features_list_m22, 'param':param_m22, 'method':'sum', 'model':'xgb'}, 
     23:{'CID2features_list':CID2features_list_m23, 'param':param_m23, 'method':'sum', 'model':'rf'}, 
     24:{'CID2features_list':CID2features_list_m24, 'param':param_m24, 'method':'sum', 'model':'rf'}, 
-    25:{'CID2features_list':CID2features_list_m25, 'param':param_m25, 'method':'sum', 'model':'rgb'},
+    25:{'CID2features_list':CID2features_list_m25, 'param':param_m25, 'method':'sum', 'model':'xgb'},
 
     26:{'CID2features_list':CID2features_list_m26, 'param':param_m26, 'method':'avg', 'model':'rf'}, 
     27:{'CID2features_list':CID2features_list_m27, 'param':param_m27, 'method':'avg', 'model':'rf'}, 
-    28:{'CID2features_list':CID2features_list_m28, 'param':param_m28, 'method':'avg', 'model':'rgb'}, 
+    28:{'CID2features_list':CID2features_list_m28, 'param':param_m28, 'method':'avg', 'model':'xgb'}, 
     29:{'CID2features_list':CID2features_list_m29, 'param':param_m29, 'method':'avg', 'model':'rf'}, 
-    30:{'CID2features_list':CID2features_list_m30, 'param':param_m30, 'method':'avg', 'model':'rgb'},
+    30:{'CID2features_list':CID2features_list_m30, 'param':param_m30, 'method':'avg', 'model':'xgb'},
 
     31:{'CID2features_list':CID2features_list_m31, 'param':param_m31, 'method':'avg', 'model':'rf'}, 
-    32:{'CID2features_list':CID2features_list_m32, 'param':param_m32, 'method':'avg', 'model':'rgb'}, 
+    32:{'CID2features_list':CID2features_list_m32, 'param':param_m32, 'method':'avg', 'model':'xgb'}, 
 }
 
 

@@ -1,11 +1,13 @@
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split, KFold, RandomizedSearchCV
-
-from src.utils import *
-# from utils import *
-
 import xgboost as xgb
+
+import sys
+sys.path.append("/Users/xinzheng/Desktop/Desktop/DreamRF")
+from src.utils import *
+
+
 
 # n_iter = 100
 # cv = 10

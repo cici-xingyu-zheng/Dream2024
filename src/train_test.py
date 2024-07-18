@@ -8,20 +8,19 @@ import numpy as np
 import pandas as pd
 import os
 
+import sys
+sys.path.append("/Users/xinzheng/Desktop/Desktop/DreamRF")
 from src.utils import *
-# from utils import * // to call the modules from another folder, like Notebooks
 
 # Below we add functions that streamline feature stacking and testing.
 
-input_path = 'Data/'
-# input_path = '../Data/' // to call the modules from another folder
+input_path = '/Users/xinzheng/Desktop/Desktop/DreamRF/Data/' # use absolute path
 
 CID_file = 'molecules_train_cid.npy'
 mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
 
 training_task_file = 'TrainingData_mixturedist.csv'
-test_task_file = 'Test/Data/LeaderboardData_mixturedist.csv'
-# test_task_file = '../Test/Data/LeaderboardData_mixturedist.csv' // to call the modules from another folder
+test_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/LeaderboardData_mixturedist.csv'
 
 features_CIDs = np.load(os.path.join(input_path, CID_file))
 # Mapping helper files
@@ -83,7 +82,7 @@ def ensemble_models(X_features, y_true, param_best, type = 'rf', num_models = 10
         if type == 'rf': 
             model = RandomForestRegressor(**param_best, random_state=i)
             model.fit(X_features, y_true)
-        elif type == 'rgb':
+        elif type == 'xgb':
             model = xgb.XGBRegressor(**param_best, random_state=i)
             model.fit(X_features, y_true)
         models.append(model)

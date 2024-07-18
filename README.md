@@ -489,8 +489,19 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 3. Whether using 10 RF models equals to get 10x the set number of trees? 
 	- Nope, with `bootstrap` set to be true, it's basically the same.
 4. Whether our models fit on the training data with a different performance? So that a weighted sum can be trained on them?
-	- 
+	- Some observation, and potential explaination:
 
+	1. Higher correlation for RF:
+   		- RF's smoother predictions might be following the overall trend of the data more closely, leading to higher correlation.
+   		- The averaging nature of RF might be capturing the general relationship well, even if individual predictions are slightly off.
+
+	2. Lower MSE for XGB:
+   		- XGB might be better at capturing specific patterns that reduce overall error, even if it doesn't always follow the trend as smoothly.
+   		- XGB's ability to focus on harder-to-predict instances through boosting could be reducing the larger errors more effectively.
+
+	- maybe we can use some weighing or stacking them to a linear regression.
+
+5. Dependency issue solved.
 ------
 
 
