@@ -540,7 +540,8 @@ Will continue to try out different ways of mixing; but it does not fundamentally
 I observe that when seperating Leffingwell and fingerprint they each do pretty well. I am running individual optimization now.
 
 If the result looks good, I might want to optimize each of them respectively, for meta model training. [on-going]
-	- Will try out Morgan alone tmrw, which might or might not generalize? (07/22/24)
+	- Will try out Morgan alone tmrw, which might or might not generalize? (07/22/24) (took a peak doesn't look too good?)
+	- Can try on Leffingwell alone too?
 
 Okay here is the plan. I still want to try 2 more ways of combining across features.
 
