@@ -1,0 +1,231 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Try Out Selected Features: selection_cleanDragonDescriptors.csv
+
+Random search for best hyperparams: round 1 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 400, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': 20, 'bootstrap': True}
+Correlation: 0.9816658400621285
+RMSE: 0.04502644582479103
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 1.0, 'n_estimators': 400, 'max_depth': 3, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.8930593069554456
+RMSE: 0.08214580893626926
+
+RandomForest Average Performance:
+R mean: 0.6370386313780918
+R std: 0.0075941650429282494
+RMSE mean: 0.12255336744092767
+RMSE std: 0.000498061596419301
+
+XGBoost Average Performance:
+R mean: 0.5943673642873655
+R std: 0.011390201983340932
+RMSE mean: 0.12611874432369025
+RMSE std: 0.0008889121696608513
+
+Random search for best hyperparams: round 2 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 300, 'min_samples_split': 5, 'max_features': 'sqrt', 'max_depth': 30, 'bootstrap': True}
+Correlation: 0.9730153084246675
+RMSE: 0.05097138752417768
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 500, 'max_depth': 5, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9855835913207386
+RMSE: 0.034655513916024706
+
+RandomForest Average Performance:
+R mean: 0.636956199250672
+R std: 0.008307913486563285
+RMSE mean: 0.12259687495352385
+RMSE std: 0.0005944524190576686
+
+XGBoost Average Performance:
+R mean: 0.621741238987307
+R std: 0.00995646548751446
+RMSE mean: 0.12241407801986086
+RMSE std: 0.0010940170592116058
+
+Random search for best hyperparams: round 3 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': True}
+Correlation: 0.9817132510779485
+RMSE: 0.04491931577354628
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 1.0, 'n_estimators': 300, 'max_depth': 3, 'learning_rate': 0.01, 'colsample_bytree': 1.0}
+Correlation: 0.8730135920525375
+RMSE: 0.08931456730946864
+
+RandomForest Average Performance:
+R mean: 0.6381368029833894
+R std: 0.007050614589874457
+RMSE mean: 0.12246098437542648
+RMSE std: 0.00038589830258162346
+
+XGBoost Average Performance:
+R mean: 0.5832808257356816
+R std: 0.010473086999898587
+RMSE mean: 0.12745374852061195
+RMSE std: 0.000629064692088353
+
+
+----------------------------------------------
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Try Out Selected Features: selection_cleanMordredDescriptors.csv
+
+Random search for best hyperparams: round 1 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 150, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': 30, 'bootstrap': True}
+Correlation: 0.9524466489140931
+RMSE: 0.06311413883480367
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.5, 'n_estimators': 500, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+Correlation: 0.99380831249241
+RMSE: 0.023613995736807447
+
+RandomForest Average Performance:
+R mean: 0.6449492173157714
+R std: 0.01206938755286889
+RMSE mean: 0.1220770513254417
+RMSE std: 0.0011429885012764409
+
+XGBoost Average Performance:
+R mean: 0.6391201322568258
+R std: 0.01369839733178574
+RMSE mean: 0.12055758921451287
+RMSE std: 0.0016419155892027665
+
+Random search for best hyperparams: round 2 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 150, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.937608044301048
+RMSE: 0.07060752653969869
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 400, 'max_depth': 5, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+Correlation: 0.9772363122624297
+RMSE: 0.04372371601205781
+
+RandomForest Average Performance:
+R mean: 0.6396509583192358
+R std: 0.009606682443118398
+RMSE mean: 0.1229173358861286
+RMSE std: 0.0011026727197135544
+
+XGBoost Average Performance:
+R mean: 0.6398988487877686
+R std: 0.014369557602965504
+RMSE mean: 0.12047775849981343
+RMSE std: 0.0017596480062189355
+
+Random search for best hyperparams: round 3 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 150, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': 30, 'bootstrap': True}
+Correlation: 0.9815069380136421
+RMSE: 0.045359655871529736
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.5, 'n_estimators': 400, 'max_depth': 5, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9673057530103638
+RMSE: 0.052031596167701435
+
+RandomForest Average Performance:
+R mean: 0.6501387323369461
+R std: 0.010637987303448181
+RMSE mean: 0.12114440181495052
+RMSE std: 0.0009413054438110344
+
+XGBoost Average Performance:
+R mean: 0.6353900578340347
+R std: 0.010301098531595861
+RMSE mean: 0.121380962210308
+RMSE std: 0.0011744095161230358
+
+
+----------------------------------------------
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Try Out Selected Features: selection_cleanMordredDescriptorsNormalized.csv
+
+Random search for best hyperparams: round 1 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 250, 'min_samples_split': 5, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.958169807711092
+RMSE: 0.06281190895494669
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 1.0, 'n_estimators': 400, 'max_depth': 7, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
+Correlation: 0.9968545603783302
+RMSE: 0.01820212553324957
+
+RandomForest Average Performance:
+R mean: 0.638652377349537
+R std: 0.010285346477315261
+RMSE mean: 0.12324704611136703
+RMSE std: 0.0007972888568175676
+
+XGBoost Average Performance:
+R mean: 0.6380432631227096
+R std: 0.013668230457304628
+RMSE mean: 0.12054497827240371
+RMSE std: 0.0017306395208049798
+
+Random search for best hyperparams: round 2 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 5, 'max_features': 'sqrt', 'max_depth': 20, 'bootstrap': True}
+Correlation: 0.9741875605675031
+RMSE: 0.05148701607569597
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 300, 'max_depth': 7, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+Correlation: 0.9879493183631427
+RMSE: 0.037862142676291045
+
+RandomForest Average Performance:
+R mean: 0.645489808180322
+R std: 0.010027067645552236
+RMSE mean: 0.12216363258206112
+RMSE std: 0.0007954754776467078
+
+XGBoost Average Performance:
+R mean: 0.6342679351102001
+R std: 0.01122586408188496
+RMSE mean: 0.12145164335085305
+RMSE std: 0.0013516477013712335
+
+Random search for best hyperparams: round 3 
+
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 150, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': 30, 'bootstrap': True}
+Correlation: 0.9551422151189938
+RMSE: 0.06321571931161808
+
+Best XGBoost model:
+Hyperparameters: {'subsample': 0.7, 'n_estimators': 200, 'max_depth': 9, 'learning_rate': 0.1, 'colsample_bytree': 0.5}
+Correlation: 0.999997258124431
+RMSE: 0.0003942103803415438
+
+RandomForest Average Performance:
+R mean: 0.6393998950980186
+R std: 0.010410304627826363
+RMSE mean: 0.12292309702372732
+RMSE std: 0.0007759847799031366
+
+XGBoost Average Performance:
+R mean: 0.6165528197969643
+R std: 0.013027240366480642
+RMSE mean: 0.12315446516582998
+RMSE std: 0.0020573017338218415
+
+
+----------------------------------------------

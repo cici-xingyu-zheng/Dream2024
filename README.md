@@ -502,6 +502,71 @@ Realize that one-hot has been encoded wrongly. Fixed now; will fix for new code.
 	- maybe we can use some weighing or stacking them to a linear regression.
 
 5. Dependency issue solved.
+
+### 07/22/24:
+1. try out the oversampled Deepnose features; doesn't seem to outperform the previous one, at least combining with selected features;
+2. try out combining predictions of the same feature set (our best so far); doing good but yet need to figure out how to use on the entire dataset with ensembles:
+
+```
+RF RMSE: 0.12197581633078773 
+Correlation: 0.6474515913228636
+
+XGB RMSE: 0.12131653217126667 
+Correlation: 0.633644940861654
+
+Combined RMSE: 0.1193005272566889 
+Correlation: 0.6552910046267708
+
+Average optimal thresholds: [0.40566357 0.61836108]
+```
+With that used on leaderboard:
+
+``` 
+Random Forest - R: 0.724
+Random Forest - RMSE: 0.120
+
+XGBoost - R: 0.716
+XGBoost - RMSE: 0.117
+
+Combined - R: 0.720
+Combined - RMSE: 0.117
+```
+
+Will continue to try out different ways of mixing; but it does not fundamentally improve actually.
+
+3. yet haven't combined model trained on different features. 
+	- for the sparse features, we can potentially drop by importance, and add them to dense? or use them in a sequential model? Tried that with a threshold 0.001, was only able to shirnk Leffingwell.
+
+I observe that when seperating Leffingwell and fingerprint they each do pretty well. I am running individual optimization now.
+
+If the result looks good, I might want to optimize each of them respectively, for meta model training. [on-going]
+
+Okay here is the plan. I still want to try 2 more ways of combining across features.
+
+1) (parallel) Meta model. Train different model outputs y's with a regularized linear regression, so that the final prediction is a weighted average of multiple models. Basically, base level models make predictions independently; and the meta-model is trained to combine them.
+
+	- first attempt is to combine best sparse and best dense.
+```
+Dense Model Performance:
+  Correlation: 0.724
+  RMSE: 0.120
+
+Sparse Model Performance:
+  Correlation: 0.683
+  RMSE: 0.120
+
+Meta Model Performance:
+  Correlation: 0.714
+  RMSE: 0.116
+```
+
+3) (sequential) Boosting on residuals. Train one or few sparse feature model on the residuals of the dense feature model. 
+
+------
+
+## Submission plans:
+- 
+
 ------
 
 

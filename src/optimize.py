@@ -14,44 +14,44 @@ from src.utils import *
 
 def para_search(seed, X, y_true):
     # Define the search space 
-    rf_param_dist = {
-        # 'n_estimators': [50, 100, 150, 200, 250, 300, 400, 500],
-        'n_estimators': [150, 200, 250, 300, 400, 500],
-        'max_depth': [None, 10, 20, 30],
-        'min_samples_split': [2, 5, 10],
-        'max_features': ['sqrt', 'log2'],
-        'bootstrap': [True]
-    }
-
-    xgb_param_dist = {
-        # 'n_estimators': [50, 100, 200, 250, 300, 400, 500],
-        'n_estimators': [150, 200, 250, 300, 400, 500],
-        'max_depth': [3, 5, 7, 9],
-        'learning_rate': [0.01, 0.1, 0.3],
-        'subsample': [0.5, 0.7, 1.0],
-        'colsample_bytree': [0.5, 0.7, 1.0]
-    }
-
-    # Specifically for sparse input:
     # rf_param_dist = {
-    # 'n_estimators': [100, 200, 300, 400],
-    # 'max_depth': [None, 10, 20, 30],
-    # 'min_samples_split': [2, 5, 10],
-    # 'min_samples_leaf': [1, 2, 4],
-    # 'max_features': ['sqrt', 'log2', 0.5],
-    # 'bootstrap': [True, False]
+    #     # 'n_estimators': [50, 100, 150, 200, 250, 300, 400, 500],
+    #     'n_estimators': [150, 200, 250, 300, 400, 500],
+    #     'max_depth': [None, 10, 20, 30],
+    #     'min_samples_split': [2, 5, 10],
+    #     'max_features': ['sqrt', 'log2'],
+    #     'bootstrap': [True]
     # }
 
     # xgb_param_dist = {
-    #     'n_estimators': [100, 200, 300, 400],
-    #     'max_depth': [3, 6, 9],
+    #     # 'n_estimators': [50, 100, 200, 250, 300, 400, 500],
+    #     'n_estimators': [150, 200, 250, 300, 400, 500],
+    #     'max_depth': [3, 5, 7, 9],
     #     'learning_rate': [0.01, 0.1, 0.3],
     #     'subsample': [0.5, 0.7, 1.0],
-    #     'colsample_bytree': [0.5, 0.7, 1.0],
-    #     'min_child_weight': [1, 3, 5],
-    #     'reg_alpha': [0, 0.1, 1],
-    #     'reg_lambda': [0, 0.1, 1]
+    #     'colsample_bytree': [0.5, 0.7, 1.0]
     # }
+
+    # Specifically for sparse input:
+    rf_param_dist = {
+    'n_estimators': [100, 200, 300, 400, 500],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'max_features': ['sqrt', 'log2', 0.5],
+    'bootstrap': [True, False]
+    }
+
+    xgb_param_dist = {
+        'n_estimators': [100, 200, 300, 400, 500],
+        'max_depth': [3, 6, 9],
+        'learning_rate': [0.01, 0.1, 0.3],
+        'subsample': [0.5, 0.7, 1.0],
+        'colsample_bytree': [0.5, 0.7, 1.0],
+        'min_child_weight': [1, 3, 5],
+        'reg_alpha': [0, 0.1, 1],
+        'reg_lambda': [0, 0.1, 1]
+    }
     
     # Create models
     rf = RandomForestRegressor(random_state=seed)

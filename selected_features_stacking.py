@@ -30,7 +30,9 @@ for feature_choice in selected_choices:
     input_path = 'Data/'
 
     features_file_1 = f'featureSelection/{feature_choice}'
-    features_file_2 =  'deepnose_features.npy'
+    # features_file_2 =  'deepnose_features.npy'
+    features_file_2 = 'deepnose_features_oversampled.npy'
+
     CID_file = 'molecules_train_cid.npy'
 
     # Read all copies, before and after correction; before was also downloaded from Dropbox.
@@ -56,6 +58,7 @@ for feature_choice in selected_choices:
     features = pd.DataFrame(features_np, columns=features.columns, index=features.index)
 
     # log standardize deepnose
+    scaler = StandardScaler(with_mean=True, with_std=True)
     epsilon = 1e-8 
     features_2 = scaler.fit_transform(np.log(features_2 + epsilon))
 
@@ -84,7 +87,8 @@ for feature_choice in selected_choices:
     diff_monos = [ len( set(pair[0]).difference(set(pair[1]))) for pair in all_pairs_CIDs]
 
     datasets = training_set['Dataset'].to_numpy()
-    encoder = OneHotEncoder()
+    desired_order = training_set['Dataset'].unique().tolist() 
+    encoder = OneHotEncoder(categories=[desired_order])
     data_arr = encoder.fit_transform(datasets.reshape(-1, 1))
     data_arr = data_arr.toarray()
 
