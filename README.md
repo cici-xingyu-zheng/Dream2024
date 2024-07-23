@@ -542,6 +542,7 @@ I observe that when seperating Leffingwell and fingerprint they each do pretty w
 If the result looks good, I might want to optimize each of them respectively, for meta model training. [on-going]
 	- Will try out Morgan alone tmrw, which might or might not generalize? (07/22/24) (took a peak doesn't look too good?)
 	- Can try on Leffingwell alone too?
+	- Can perhaps optimize combined sparse again...
 
 Okay here is the plan. I still want to try 2 more ways of combining across features.
 
@@ -563,7 +564,7 @@ Meta Model Performance:
   RMSE: 0.116
 ```
 
-3) (sequential) Boosting on residuals. Train one or few sparse feature model on the residuals of the dense feature model. 
+2) (sequential) Boosting on residuals. Train one or few sparse feature model on the residuals of the dense feature model. 
 
 ------
 
