@@ -543,6 +543,7 @@ If the result looks good, I might want to optimize each of them respectively, fo
 	- Will try out Morgan alone tmrw, which might or might not generalize? (07/22/24) (took a peak doesn't look too good?)
 	- Can try on Leffingwell alone too?
 	- Can perhaps optimize combined sparse again...
+	- Try Mordred alone in your train test and see if there's a bug?
 
 Okay here is the plan. I still want to try 2 more ways of combining across features.
 
