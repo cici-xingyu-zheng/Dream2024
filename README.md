@@ -540,12 +540,14 @@ Will continue to try out different ways of mixing; but it does not fundamentally
 I observe that when seperating Leffingwell and fingerprint they each do pretty well. I am running individual optimization now.
 
 If the result looks good, I might want to optimize each of them respectively, for meta model training. [on-going]
+	- Will try out Morgan alone tmrw, which might or might not generalize? (07/22/24)
 
 Okay here is the plan. I still want to try 2 more ways of combining across features.
 
 1) (parallel) Meta model. Train different model outputs y's with a regularized linear regression, so that the final prediction is a weighted average of multiple models. Basically, base level models make predictions independently; and the meta-model is trained to combine them.
 
-	- first attempt is to combine best sparse and best dense.
+	- first attempt is to combine best sparse and best dense. Well at least the results says that this procedure helps with RMSE but perhaps not Correlation, if the correlation of the original model is bad; this is a bit of a comfort that we perhaps don't need to try out many combos of not so good performance.
+
 ```
 Dense Model Performance:
   Correlation: 0.724
