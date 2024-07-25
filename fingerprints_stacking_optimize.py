@@ -14,11 +14,12 @@ from sklearn.preprocessing import OneHotEncoder
 import xgboost as xgb
 
 sizes = [50, 100]
-versions = ['AtomPairs', 'Morgan', 'RDKit', 'TopologicalTorsions']
+versions = ['AtomPairs', 'Morgan', 'TopologicalTorsions']
 input_path = 'Data/'
-methods = ['avg', 'sum']
+methods = ['sum']
 
-    
+# update on 07/23/24
+
 for version in versions:
     print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
     print('Version of physical chemical fingerprint:', version)
@@ -31,11 +32,10 @@ for version in versions:
             print('Used dimension:', size)
             print()
             feature_file = f'Fingerprints/{version}_Fingerprints_Frequency_Size{size}.csv'
-            features_file_2 =  'leffingwell_features.npy'
+            features_file_2 =  'leffingwell_features_96.npy'
             CID_file = 'molecules_train_cid.npy'
 
-            # Read all copies, before and after correction; before was also downloaded from Dropbox.
-            mixture_file = 'Mixure_Definitions_Training_set.csv' 
+            mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
             training_task_file = 'TrainingData_mixturedist.csv'
 
             # Mordred features
@@ -52,6 +52,7 @@ for version in versions:
 
             CID2features_morgan =  {CID: features_1.loc[CID].tolist() for CID in features_CIDs}
             CID2features_leffingwell = {CID: features_2[i] for i, CID in enumerate(features_CIDs)}
+            
             X_m, y, num_mixtures, all_pairs_CIDs = format_Xy(training_set,  mixtures_IDs, CID2features_morgan, method = f'{method}')
             X_l, _, _, _ = format_Xy(training_set,  mixtures_IDs, CID2features_leffingwell, method = f'{method}')
 

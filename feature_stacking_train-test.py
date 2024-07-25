@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
+
 import os
 
 
@@ -107,6 +108,8 @@ CID2features_list_m30 = [CID2features_selected_1c, CID2features_2]
 CID2features_list_m31 = [CID2features_selected_1a, CID2features_selected_1b, CID2features_2] 
 CID2features_list_m32 = [CID2features_selected_1a, CID2features_selected_1b, CID2features_2] 
 
+CID2features_list_m33 = [sparse_1a50]
+CID2features_list_m34 = [sparse_1a50]
 
 param_m9 = {'n_estimators': 300, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': True}
 param_m10 = {'subsample': 0.7, 'n_estimators': 400, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
@@ -130,48 +133,95 @@ param_m30 = {'subsample': 0.7, 'n_estimators': 400, 'max_depth': 9, 'learning_ra
 param_m31 = {'n_estimators': 500, 'min_samples_split': 2, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': True}
 param_m32 = {'subsample': 0.7, 'n_estimators': 300, 'max_depth': 9, 'learning_rate': 0.01, 'colsample_bytree': 0.5}
 
+param_m33 = {'n_estimators': 500, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 0.5, 'max_depth': 20, 'bootstrap': False}
+param_m34 = {'subsample': 1.0, 'reg_lambda': 1, 'reg_alpha': 0, 'n_estimators': 400, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.01, 'colsample_bytree': 0.7}
+
+model_specs = {
+    9:{'CID2features_list':CID2features_list_m9, 'param':param_m9, 'method':'avg', 'model':'rf'}, 
+    10:{'CID2features_list':CID2features_list_m10, 'param':param_m10, 'method':'avg', 'model':'xgb'}, 
+    11:{'CID2features_list':CID2features_list_m11, 'param':param_m11, 'method':'avg', 'model':'rf'}, 
+    12:{'CID2features_list':CID2features_list_m12, 'param':param_m12, 'method':'avg', 'model':'xgb'}, 
+    13:{'CID2features_list':CID2features_list_m13, 'param':param_m13, 'method':'avg', 'model':'rf'}, 
+
+    20:{'CID2features_list':CID2features_list_m20, 'param':param_m20, 'method':'sum', 'model':'rf'}, 
+    21:{'CID2features_list':CID2features_list_m21, 'param':param_m21, 'method':'sum', 'model':'rf'}, 
+    22:{'CID2features_list':CID2features_list_m22, 'param':param_m22, 'method':'sum', 'model':'xgb'}, 
+    23:{'CID2features_list':CID2features_list_m23, 'param':param_m23, 'method':'sum', 'model':'rf'}, 
+    24:{'CID2features_list':CID2features_list_m24, 'param':param_m24, 'method':'sum', 'model':'rf'}, 
+    25:{'CID2features_list':CID2features_list_m25, 'param':param_m25, 'method':'sum', 'model':'xgb'},
+
+    26:{'CID2features_list':CID2features_list_m26, 'param':param_m26, 'method':'avg', 'model':'rf'}, 
+    27:{'CID2features_list':CID2features_list_m27, 'param':param_m27, 'method':'avg', 'model':'rf'}, 
+    28:{'CID2features_list':CID2features_list_m28, 'param':param_m28, 'method':'avg', 'model':'xgb'}, 
+    29:{'CID2features_list':CID2features_list_m29, 'param':param_m29, 'method':'avg', 'model':'rf'}, 
+    30:{'CID2features_list':CID2features_list_m30, 'param':param_m30, 'method':'avg', 'model':'xgb'},
+
+    31:{'CID2features_list':CID2features_list_m31, 'param':param_m31, 'method':'avg', 'model':'rf'}, 
+    32:{'CID2features_list':CID2features_list_m32, 'param':param_m32, 'method':'avg', 'model':'xgb'}, 
+}
 
 # model_specs = {
-#     9:{'CID2features_list':CID2features_list_m9, 'param':param_m9, 'method':'avg', 'model':'rf'}, 
-#     10:{'CID2features_list':CID2features_list_m10, 'param':param_m10, 'method':'avg', 'model':'xgb'}, 
-#     11:{'CID2features_list':CID2features_list_m11, 'param':param_m11, 'method':'avg', 'model':'rf'}, 
-#     12:{'CID2features_list':CID2features_list_m12, 'param':param_m12, 'method':'avg', 'model':'xgb'}, 
-#     13:{'CID2features_list':CID2features_list_m13, 'param':param_m13, 'method':'avg', 'model':'rf'}, 
-
-#     20:{'CID2features_list':CID2features_list_m20, 'param':param_m20, 'method':'sum', 'model':'rf'}, 
-#     21:{'CID2features_list':CID2features_list_m21, 'param':param_m21, 'method':'sum', 'model':'rf'}, 
-#     22:{'CID2features_list':CID2features_list_m22, 'param':param_m22, 'method':'sum', 'model':'xgb'}, 
-#     23:{'CID2features_list':CID2features_list_m23, 'param':param_m23, 'method':'sum', 'model':'rf'}, 
-#     24:{'CID2features_list':CID2features_list_m24, 'param':param_m24, 'method':'sum', 'model':'rf'}, 
-#     25:{'CID2features_list':CID2features_list_m25, 'param':param_m25, 'method':'sum', 'model':'xgb'},
-
-#     26:{'CID2features_list':CID2features_list_m26, 'param':param_m26, 'method':'avg', 'model':'rf'}, 
-#     27:{'CID2features_list':CID2features_list_m27, 'param':param_m27, 'method':'avg', 'model':'rf'}, 
-#     28:{'CID2features_list':CID2features_list_m28, 'param':param_m28, 'method':'avg', 'model':'xgb'}, 
-#     29:{'CID2features_list':CID2features_list_m29, 'param':param_m29, 'method':'avg', 'model':'rf'}, 
-#     30:{'CID2features_list':CID2features_list_m30, 'param':param_m30, 'method':'avg', 'model':'xgb'},
-
-#     31:{'CID2features_list':CID2features_list_m31, 'param':param_m31, 'method':'avg', 'model':'rf'}, 
-#     32:{'CID2features_list':CID2features_list_m32, 'param':param_m32, 'method':'avg', 'model':'xgb'}, 
+#         33:{'CID2features_list':CID2features_list_m33, 'param':param_m33, 'method':'sum', 'model':'rf'}, 
+#         34:{'CID2features_list':CID2features_list_m34, 'param':param_m34, 'method':'sum', 'model':'xgb'}, 
 # }
 
 
-
+# Initialize a list to store results for each model
+results_list = []
 
 for key in model_specs.keys():
+    print('_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_')
     print(f'Testing Model: M{key} \n')
     CID2features_list = model_specs[key]['CID2features_list']
     param = model_specs[key]['param']
-    method =  model_specs[key]['method']
-    model_type =  model_specs[key]['model']
+    method = model_specs[key]['method']
+    model_type = model_specs[key]['model']
  
     X_features, y_true = stacking_X_features(CID2features_list, method)
-    models = ensemble_models(X_features, y_true, param, type = model_type, num_models = 10)
-    X_test, y_test_true = stacking_X_test_features(CID2features_list,  X_features, method)
-    y_pred_avg = pred_mean(models, X_test)
-    corr = np.corrcoef(y_pred_avg, y_test_true)[0, 1]
-    rmse = np.sqrt(mean_squared_error(np.array(y_test_true), y_pred_avg))
+    models = ensemble_models(X_features, y_true, param, type=model_type, num_models=10)
+    X_test, y_test_true = stacking_X_test_features(CID2features_list, X_features, method)
+    y_train_pred_avg = pred_mean(models, X_features)
+    y_test_pred_avg = pred_mean(models, X_test)
 
-    print(f"{model_type} - R: {corr:.3f}")
-    print(f"{model_type} - RMSE: {rmse:.3f}")
+    train_corr = np.corrcoef(y_train_pred_avg, y_true)[0, 1]
+    train_rmse = np.sqrt(mean_squared_error(np.array(y_true), y_train_pred_avg))
+
+    bootstrap_results = bootstrap_metrics_small_sample(y_test_true, y_test_pred_avg)
+
+    original_corr = np.corrcoef(y_test_pred_avg, y_test_true)[0, 1]
+    original_rmse = np.sqrt(mean_squared_error(y_test_true, y_test_pred_avg))
+
+    # Print results (you can keep or remove this part)
+    print(f"Bootstrapped Metrics (with 95% CI):")
+    print(f"Correlation: {bootstrap_results['corr']['mean']:.4f} (95% CI: {bootstrap_results['corr']['ci'][0]:.4f} - {bootstrap_results['corr']['ci'][1]:.4f})")
+    print(f"RMSE: {bootstrap_results['rmse']['mean']:.4f} (95% CI: {bootstrap_results['rmse']['ci'][0]:.4f} - {bootstrap_results['rmse']['ci'][1]:.4f})")
+    print("\nOriginal Metrics:")
+    print(f"Correlation: {original_corr:.4f}")
+    print(f"RMSE: {original_rmse:.4f}")
     print()
+
+    # Collect results
+    results_list.append({
+        'Model': f'M{key}',
+        'Train_Corr': train_corr,
+        'Train_RMSE': train_rmse,
+        'Test_Corr': original_corr,
+        'Test_RMSE': original_rmse,
+        'Bootstrap_Corr_Mean': bootstrap_results['corr']['mean'],
+        'Bootstrap_Corr_CI_Lower': bootstrap_results['corr']['ci'][0],
+        'Bootstrap_Corr_CI_Upper': bootstrap_results['corr']['ci'][1],
+        'Bootstrap_RMSE_Mean': bootstrap_results['rmse']['mean'],
+        'Bootstrap_RMSE_CI_Lower': bootstrap_results['rmse']['ci'][0],
+        'Bootstrap_RMSE_CI_Upper': bootstrap_results['rmse']['ci'][1]
+    })
+
+# Create DataFrame from results
+performance_df = pd.DataFrame(results_list)
+
+# Save DataFrame to CSV
+performance_df.to_csv("Output/performance_base-models.csv", index=False)
+
+print("Performance results saved to Output/performance_base-models.csv")
+
+
+

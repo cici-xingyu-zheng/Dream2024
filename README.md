@@ -539,19 +539,22 @@ Will continue to try out different ways of mixing; but it does not fundamentally
 
 I observe that when seperating Leffingwell and fingerprint they each do pretty well. I am running individual optimization now.
 
-If the result looks good, I might want to optimize each of them respectively, for meta model training. [on-going]
-	- Will try out Morgan alone tmrw, which might or might not generalize? (07/22/24) (took a peak doesn't look too good?)
-	- Can try on Leffingwell alone too?
-	- Can perhaps optimize combined sparse again...
-	- Try Mordred alone in your train test and see if there's a bug?
+If the result looks good, I might want to optimize each of them respectively, for meta model training. 
+	- Will try out Morgan alone, which might or might not generalize? (07/22/24) (took a peak doesn't look too good)
+	- Can try on Leffingwell alone too? (did a basic trimming to 96 dim)
+	- Can perhaps optimize combined sparse again...(done; but result looks not as good as before; how come?!)
+	- Try Mordred alone in your train test and see if there's a bug (done; nope does not seem so)
 
 Okay here is the plan. I still want to try 2 more ways of combining across features.
 
-1) (parallel) Meta model. Train different model outputs y's with a regularized linear regression, so that the final prediction is a weighted average of multiple models. Basically, base level models make predictions independently; and the meta-model is trained to combine them.
+1) **(parallel) Meta model.** Train different model outputs y's with a regularized linear regression, so that the final prediction is a weighted average of multiple models. Basically, base level models make predictions independently; and the meta-model is trained to combine them.
 
-	- first attempt is to combine best sparse and best dense. Well at least the results says that this procedure helps with RMSE but perhaps not Correlation, if the correlation of the original model is bad; this is a bit of a comfort that we perhaps don't need to try out many combos of not so good performance.
+	- first attempt is to combine sparse features and dense features that each outperforms. Well at least the results says that this procedure helps with RMSE but perhaps less with correlation, if the correlation of the original model is bad; this is a bit of a comfort that we perhaps don't need to try out many combos of not so good performance.
+	- different meta model: I tried linear-ridge, polynomial-ridge, KNN, RF, and Gradient Boost. 
 
-```
+
+``` 
+# with linear ridge:
 Dense Model Performance:
   Correlation: 0.724
   RMSE: 0.120
@@ -565,18 +568,63 @@ Meta Model Performance:
   RMSE: 0.116
 ```
 
-2) (sequential) Boosting on residuals. Train one or few sparse feature model on the residuals of the dense feature model. 
+Results all:
+
+```
+Ridge - RMSE: 0.1152, Correlation: 0.7156
+Poly_Ridge - RMSE: 0.1168, Correlation: 0.7099
+RF - RMSE: 0.1139, Correlation: 0.7270
+GB - RMSE: 0.1138, Correlation: 0.7250
+KNN - RMSE: 0.1163, Correlation: 0.7081
+```
+
+So the currently winning one is a RF on two RFs.. `RF - RMSE: 0.1139, Correlation: 0.7270`. Although we haven't spent effort in optimizing the meta model.
+
+2) **(sequential) Boosting on residuals.** Train one or few sparse feature model on the residuals of the dense feature model. In the current attempt we use the same dense and sparse feature set as the meta model. We used the hyper parameter for the best dense, and optimize for the sparse model trained on residuals.
+
+The result is in the bulk of: 
+```
+Sequential Model Performance: {'RMSE': 0.11682718231230123, 'Correlation': 0.7233837879784443}
+```
+
+But optimization doesn't seem to help too much. I haven't tried to swap the second model to non RF models.
 
 ------
 
 ## Submission plans:
-- 
+- For leaderboard: use model trained on training set;
+- For final test: use the same model trained on training and leaderboard.
+
+### Internal scoring method
+I've done R and RMSE bootstrapping for leaderboard, but perhaps we will rank models their way.
+
+### Model candidates
+(hand picked..)
+1. Best base RF model, deepnose + selected mordred 
+2. Best meta RF model: RF on RFs on i) (dense) deepnose + selected mordred and ii) (sparse) leffingwell + morgan
+3. Best sequential RF model: RF of sparse trained on RF on dense's residual.
+
+Not sure what we judge on; since for meta models, polynomial ridge perform better in cross fold validation. 
 
 ------
 
 
 ## TO-DO:
+
 **Priority**:
+
+#### TO-DOs 07/24/24:
+1. investigate new sparse optimization round for Leffingwell_96; what was going on 
+	- looks in bulk similar to what we had; some stocasticity I guess.
+2. figure out the wierd k-fold CV does not predict whole data nor leaderboard effect 
+	- my current take is that dataset is extremely heterogenous, and some fold just perform very off; 
+	- the leaderboard data is in the range favoring more the RF-RF stacking
+	- the leaderboard data's distance to the training is not significantly different from training to training.
+3. split the the meta v.s. sequential model to two notebooks [done]
+4. incoporate bootstrapping in reporting leaderboard results (done, my way, but need to hear what they'd score it too)
+5. the new features Cyrille provided 
+
+
 1. code for making feature generation and stacking more compact for testing 
 2. mix and match 
 3. record performance comprehensively and carry out leaderboard testing

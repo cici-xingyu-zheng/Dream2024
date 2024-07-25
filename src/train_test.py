@@ -3,7 +3,8 @@ from sklearn.impute import KNNImputer
 import xgboost as xgb
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.utils import resample
-
+from scipy.stats import pearsonr
+from sklearn.metrics import mean_squared_error
 import numpy as np
 import pandas as pd
 import os
@@ -102,11 +103,11 @@ def ensemble_models_with_bootstrap(X_features, y_true, param_best, type='rf', nu
         if type == 'rf':
             model = RandomForestRegressor(**param_best, random_state=i)
             model.fit(X_bootstrap, y_bootstrap)
-        elif type == 'rgb':
+        elif type == 'xgb':
             model = xgb.XGBRegressor(**param_best, random_state=i)
             model.fit(X_bootstrap, y_bootstrap)
         else:
-            raise ValueError("Invalid model type. Choose 'rf' or 'rgb'.")
+            raise ValueError("Invalid model type. Choose 'rf' or 'xgb'.")
         
         models.append(model)
     
@@ -168,3 +169,45 @@ def pred_mean(models, X_test):
     y_pred_avg = np.mean(y_pred_list, axis=0)
 
     return y_pred_avg
+
+
+
+def bootstrap_metrics_small_sample(y_true, y_pred, n_iterations=1000):
+    n_samples = len(y_true)
+    results = {'corr': [], 'rmse': []}
+    
+    for _ in range(n_iterations):
+        # Resample with replacement
+        indices = resample(range(n_samples), n_samples=n_samples)
+        
+        # Find samples that were not selected (out-of-bag samples)
+        oob_indices = list(set(range(n_samples)) - set(indices))
+        
+        # If we have out-of-bag samples, use them for evaluation
+        if oob_indices:
+            y_true_oob = y_true[oob_indices]
+            y_pred_oob = y_pred[oob_indices]
+            
+            # Calculate metrics
+            corr, _ = pearsonr(y_true_oob, y_pred_oob)
+            rmse = np.sqrt(mean_squared_error(y_true_oob, y_pred_oob))
+            
+            results['corr'].append(corr)
+            results['rmse'].append(rmse)
+    
+    # Calculate confidence intervals
+    ci_lower, ci_upper = 2.5, 97.5  # For 95% CI
+    
+    corr_ci = np.percentile(results['corr'], [ci_lower, ci_upper])
+    rmse_ci = np.percentile(results['rmse'], [ci_lower, ci_upper])
+    
+    return {
+        'corr': {
+            'mean': np.mean(results['corr']),
+            'ci': corr_ci
+        },
+        'rmse': {
+            'mean': np.mean(results['rmse']),
+            'ci': rmse_ci
+        }
+    }

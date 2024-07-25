@@ -33,7 +33,7 @@ for version in versions:
             CID_file = 'molecules_train_cid.npy'
 
             # Read all copies, before and after correction; before was also downloaded from Dropbox.
-            mixture_file = 'Mixure_Definitions_Training_set.csv' 
+            mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
             training_task_file = 'TrainingData_mixturedist.csv'
 
             # Mordred features

@@ -1,0 +1,62 @@
+Cross-validation Performance (Residual Approach):
+Dense Model Performance: {'RMSE': 0.12248608448322859, 'Correlation': 0.6414345447059586}
+Sparse Model Performance (on residuals): {'RMSE': 0.1205064404710923, 'Correlation': 0.5100612998906364}
+Combined Model Performance: {'RMSE': 0.12050644047109231, 'Correlation': 0.6448345407631964}
+Leaderboard Performance:
+Dense Model Performance: {'RMSE': 0.11981374609469903, 'Correlation': 0.7236704364028862}
+Sparse Model Performance (on residuals): {'RMSE': 0.11682718231230123, 'Correlation': 0.2987214096786217}
+Combined Model Performance: {'RMSE': 0.11682718231230123, 'Correlation': 0.7233837879784443}
+
+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
+Start evaluating using optimized model...
+Round 1
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 10, 'max_features': 'log2', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9251227489523028
+RMSE: 0.08149609704537751
+
+Cross-validation Performance (Residual Approach):
+Dense Model Performance: {'RMSE': 0.12248608448322859, 'Correlation': 0.6414345447059586}
+Sparse Model Performance (on residuals): {'RMSE': 0.12119905370432495, 'Correlation': 0.5086545942307055}
+Combined Model Performance: {'RMSE': 0.12119905370432495, 'Correlation': 0.642596130911464}
+
+Leaderboard Performance:
+Dense Model Performance: {'RMSE': 0.11981374609469903, 'Correlation': 0.7236704364028862}
+Sparse Model Performance (on residuals): {'RMSE': 0.11823999349664042, 'Correlation': 0.2500131815680215}
+Combined Model Performance: {'RMSE': 0.11823999349664042, 'Correlation': 0.7213639885206802}
+
+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
+Start evaluating using optimized model...
+Round 2
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 150, 'min_samples_split': 10, 'max_features': 'log2', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9152767287160126
+RMSE: 0.08178977332070844
+
+Cross-validation Performance (Residual Approach):
+Dense Model Performance: {'RMSE': 0.12248608448322859, 'Correlation': 0.6414345447059586}
+Sparse Model Performance (on residuals): {'RMSE': 0.12104599489464087, 'Correlation': 0.5070641211843032}
+Combined Model Performance: {'RMSE': 0.12104599489464087, 'Correlation': 0.6438684981137333}
+
+Leaderboard Performance:
+Dense Model Performance: {'RMSE': 0.11981374609469903, 'Correlation': 0.7236704364028862}
+Sparse Model Performance (on residuals): {'RMSE': 0.1183598032339268, 'Correlation': 0.23290828588189838}
+Combined Model Performance: {'RMSE': 0.11835980323392682, 'Correlation': 0.7204370225848284}
+
+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
+Start evaluating using optimized model...
+Round 3
+Best Random Forest model:
+Hyperparameters: {'n_estimators': 500, 'min_samples_split': 10, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': True}
+Correlation: 0.9326340574103238
+RMSE: 0.07888035611584514
+
+Cross-validation Performance (Residual Approach):
+Dense Model Performance: {'RMSE': 0.12248608448322859, 'Correlation': 0.6414345447059586}
+Sparse Model Performance (on residuals): {'RMSE': 0.12105913280225042, 'Correlation': 0.5109893667025058}
+Combined Model Performance: {'RMSE': 0.12105913280225042, 'Correlation': 0.6426246115736557}
+
+Leaderboard Performance:
+Dense Model Performance: {'RMSE': 0.11981374609469903, 'Correlation': 0.7236704364028862}
+Sparse Model Performance (on residuals): {'RMSE': 0.11776319578470133, 'Correlation': 0.27845552315462774}
+Combined Model Performance: {'RMSE': 0.11776319578470137, 'Correlation': 0.722265452281743}
