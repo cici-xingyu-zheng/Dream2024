@@ -10,7 +10,6 @@ from sklearn.preprocessing import StandardScaler
 import os
 
 
-
 input_path = 'Data/'
 
 
@@ -166,11 +165,80 @@ model_specs = {
 # }
 
 
-# Initialize a list to store results for each model
-results_list = []
+# # Initialize a list to store results for each model
+# results_list = []
+
+# for key in model_specs.keys():
+#     print('_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_')
+#     print(f'Testing Model: M{key} \n')
+#     CID2features_list = model_specs[key]['CID2features_list']
+#     param = model_specs[key]['param']
+#     method = model_specs[key]['method']
+#     model_type = model_specs[key]['model']
+ 
+#     X_features, y_true = stacking_X_features(CID2features_list, method)
+#     models = ensemble_models(X_features, y_true, param, type=model_type, num_models=10)
+#     X_test, y_test_true = stacking_X_test_features(CID2features_list, X_features, method)
+#     y_train_pred_avg = pred_mean(models, X_features)
+#     y_test_pred_avg = pred_mean(models, X_test)
+
+#     train_corr = np.corrcoef(y_train_pred_avg, y_true)[0, 1]
+#     train_rmse = np.sqrt(mean_squared_error(np.array(y_true), y_train_pred_avg))
+
+#     bootstrap_results = bootstrap_metrics_small_sample(y_test_true, y_test_pred_avg)
+
+#     original_corr = np.corrcoef(y_test_pred_avg, y_test_true)[0, 1]
+#     original_rmse = np.sqrt(mean_squared_error(y_test_true, y_test_pred_avg))
+
+#     # Print results (you can keep or remove this part)
+#     print(f"Bootstrapped Metrics (with 95% CI):")
+#     print(f"Correlation: {bootstrap_results['corr']['mean']:.4f} (95% CI: {bootstrap_results['corr']['ci'][0]:.4f} - {bootstrap_results['corr']['ci'][1]:.4f})")
+#     print(f"RMSE: {bootstrap_results['rmse']['mean']:.4f} (95% CI: {bootstrap_results['rmse']['ci'][0]:.4f} - {bootstrap_results['rmse']['ci'][1]:.4f})")
+#     print("\nOriginal Metrics:")
+#     print(f"Correlation: {original_corr:.4f}")
+#     print(f"RMSE: {original_rmse:.4f}")
+#     print()
+
+#     # Collect results
+#     results_list.append({
+#         'Model': f'M{key}',
+#         'Train_Corr': train_corr,
+#         'Train_RMSE': train_rmse,
+#         'Test_Corr': original_corr,
+#         'Test_RMSE': original_rmse,
+#         'Bootstrap_Corr_Mean': bootstrap_results['corr']['mean'],
+#         'Bootstrap_Corr_CI_Lower': bootstrap_results['corr']['ci'][0],
+#         'Bootstrap_Corr_CI_Upper': bootstrap_results['corr']['ci'][1],
+#         'Bootstrap_RMSE_Mean': bootstrap_results['rmse']['mean'],
+#         'Bootstrap_RMSE_CI_Lower': bootstrap_results['rmse']['ci'][0],
+#         'Bootstrap_RMSE_CI_Upper': bootstrap_results['rmse']['ci'][1]
+#     })
+
+#     print('y_true:')
+#     print(y_test_true)
+#     y_preds.append(y_test_true)
+
+#     print('y_pred:')
+#     print(y_test_pred_avg)
+#     y_preds.append(y_test_pred_avg)
+
+# # Create DataFrame from results
+# performance_df = pd.DataFrame(results_list)
+
+# # Save DataFrame to CSV
+# performance_df.to_csv("Output/performance_base-models.csv", index=False)
+
+# print("Performance results saved to Output/performance_base-models.csv")
+
+
+# Initialize empty dictionaries to store predictions
+predictions_test = {}
+predictions_train = {}
+
+y_test_true_stored = None
+y_train_true_stored = None
 
 for key in model_specs.keys():
-    print('_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_')
     print(f'Testing Model: M{key} \n')
     CID2features_list = model_specs[key]['CID2features_list']
     param = model_specs[key]['param']
@@ -180,48 +248,35 @@ for key in model_specs.keys():
     X_features, y_true = stacking_X_features(CID2features_list, method)
     models = ensemble_models(X_features, y_true, param, type=model_type, num_models=10)
     X_test, y_test_true = stacking_X_test_features(CID2features_list, X_features, method)
-    y_train_pred_avg = pred_mean(models, X_features)
     y_test_pred_avg = pred_mean(models, X_test)
+    y_train_pred_avg = pred_mean(models, X_features)
 
-    train_corr = np.corrcoef(y_train_pred_avg, y_true)[0, 1]
-    train_rmse = np.sqrt(mean_squared_error(np.array(y_true), y_train_pred_avg))
+    # Store y_test_true only once
+    if y_test_true_stored is None:
+        y_test_true_stored = y_test_true
+    
+    if y_train_true_stored is None:
+        y_train_true_stored = y_true
+    
+    # Store predictions for this model
+    predictions_test[f'M{key}'] = y_test_pred_avg
+    predictions_train[f'M{key}'] = y_train_pred_avg
 
-    bootstrap_results = bootstrap_metrics_small_sample(y_test_true, y_test_pred_avg)
+# Create the dataframe
+y_pred_test_df = pd.DataFrame({'y_test_true': y_test_true_stored})
+y_pred_train_df = pd.DataFrame({'y_true': y_train_true_stored})
 
-    original_corr = np.corrcoef(y_test_pred_avg, y_test_true)[0, 1]
-    original_rmse = np.sqrt(mean_squared_error(y_test_true, y_test_pred_avg))
+# Add predictions for each model
+for key, pred in predictions_test.items():
+    y_pred_test_df[key] = pred
 
-    # Print results (you can keep or remove this part)
-    print(f"Bootstrapped Metrics (with 95% CI):")
-    print(f"Correlation: {bootstrap_results['corr']['mean']:.4f} (95% CI: {bootstrap_results['corr']['ci'][0]:.4f} - {bootstrap_results['corr']['ci'][1]:.4f})")
-    print(f"RMSE: {bootstrap_results['rmse']['mean']:.4f} (95% CI: {bootstrap_results['rmse']['ci'][0]:.4f} - {bootstrap_results['rmse']['ci'][1]:.4f})")
-    print("\nOriginal Metrics:")
-    print(f"Correlation: {original_corr:.4f}")
-    print(f"RMSE: {original_rmse:.4f}")
-    print()
+for key, pred in predictions_train.items():
+    y_pred_train_df[key] = pred
 
-    # Collect results
-    results_list.append({
-        'Model': f'M{key}',
-        'Train_Corr': train_corr,
-        'Train_RMSE': train_rmse,
-        'Test_Corr': original_corr,
-        'Test_RMSE': original_rmse,
-        'Bootstrap_Corr_Mean': bootstrap_results['corr']['mean'],
-        'Bootstrap_Corr_CI_Lower': bootstrap_results['corr']['ci'][0],
-        'Bootstrap_Corr_CI_Upper': bootstrap_results['corr']['ci'][1],
-        'Bootstrap_RMSE_Mean': bootstrap_results['rmse']['mean'],
-        'Bootstrap_RMSE_CI_Lower': bootstrap_results['rmse']['ci'][0],
-        'Bootstrap_RMSE_CI_Upper': bootstrap_results['rmse']['ci'][1]
-    })
+# Save the dataframe to CSV
+y_pred_train_df.to_csv('Performance/y_pred_training.csv', index=False)
+print("Predictions saved to Performance/y_pred_training.csv")
 
-# Create DataFrame from results
-performance_df = pd.DataFrame(results_list)
-
-# Save DataFrame to CSV
-performance_df.to_csv("Output/performance_base-models.csv", index=False)
-
-print("Performance results saved to Output/performance_base-models.csv")
-
-
+y_pred_test_df.to_csv('Performance/y_pred_leaderboard.csv', index=False)
+print("Predictions saved to Performance/y_pred_leaderboard.csv")
 

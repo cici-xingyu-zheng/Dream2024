@@ -621,20 +621,16 @@ Not sure what we judge on; since for meta models, polynomial ridge perform bette
 **Priority**:
 
 #### TO-DOs 07/24/24:
-1. investigate new sparse optimization round for Leffingwell_96; what was going on 
+0. swap x1 and x2, have the same score (Friday, 07/26/24) 
+1. investigate new sparse optimization round for Leffingwell_96; what was going on [done] 
 	- looks in bulk similar to what we had; some stocasticity I guess.
-2. figure out the wierd k-fold CV does not predict whole data nor leaderboard effect 
+2. figure out the wierd k-fold CV does not predict whole data nor leaderboard effect [mentally-done] 
 	- my current take is that dataset is extremely heterogenous, and some fold just perform very off; 
 	- the leaderboard data is in the range favoring more the RF-RF stacking
 	- the leaderboard data's distance to the training is not significantly different from training to training.
 3. split the the meta v.s. sequential model to two notebooks [done]
-4. incoporate bootstrapping in reporting leaderboard results (done, my way, but need to hear what they'd score it too)
+4. incoporate bootstrapping in reporting leaderboard results (done, my way, but need to hear what they'd score it too) [done] 
 5. the new features Cyrille provided 
-
-
-1. code for making feature generation and stacking more compact for testing 
-2. mix and match 
-3. record performance comprehensively and carry out leaderboard testing
 
 
 **Prvious left**: 

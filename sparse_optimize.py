@@ -32,7 +32,6 @@ for version in versions:
             feature_file = f'Fingerprints/{version}_Fingerprints_Frequency_Size{size}.csv'
             CID_file = 'molecules_train_cid.npy'
 
-            # Read all copies, before and after correction; before was also downloaded from Dropbox.
             mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
             training_task_file = 'TrainingData_mixturedist.csv'
 
