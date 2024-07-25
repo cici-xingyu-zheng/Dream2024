@@ -540,10 +540,17 @@ Will continue to try out different ways of mixing; but it does not fundamentally
 I observe that when seperating Leffingwell and fingerprint they each do pretty well. I am running individual optimization now.
 
 If the result looks good, I might want to optimize each of them respectively, for meta model training. 
+
 	- Will try out Morgan alone, which might or might not generalize? (07/22/24) (took a peak doesn't look too good)
+
 	- Can try on Leffingwell alone too? (did a basic trimming to 96 dim)
+
 	- Can perhaps optimize combined sparse again...(done; but result looks not as good as before; how come?!)
+
 	- Try Mordred alone in your train test and see if there's a bug (done; nope does not seem so)
+
+### 07/24/24:
+
 
 Okay here is the plan. I still want to try 2 more ways of combining across features.
 
@@ -580,7 +587,7 @@ KNN - RMSE: 0.1163, Correlation: 0.7081
 
 So the currently winning one is a RF on two RFs.. `RF - RMSE: 0.1139, Correlation: 0.7270`. Although we haven't spent effort in optimizing the meta model.
 
-2) **(sequential) Boosting on residuals.** Train one or few sparse feature model on the residuals of the dense feature model. In the current attempt we use the same dense and sparse feature set as the meta model. We used the hyper parameter for the best dense, and optimize for the sparse model trained on residuals.
+2) **(sequential) Boosting on residuals model.** Train one or few sparse feature model on the residuals of the dense feature model. In the current attempt we use the same dense and sparse feature set as the meta model. We used the hyper parameter for the best dense, and optimize for the sparse model trained on residuals.
 
 The result is in the bulk of: 
 ```
