@@ -21,7 +21,11 @@ CID_file = 'molecules_train_cid.npy'
 mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
 
 training_task_file = 'TrainingData_mixturedist.csv'
-test_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/LeaderboardData_mixturedist.csv'
+all_task_file =  '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/AllData_mixturedist.csv'
+
+leaderboard_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/LeaderboardData_mixturedist.csv'
+test_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/TestData_mixsturedist.csv'
+
 
 features_CIDs = np.load(os.path.join(input_path, CID_file))
 # Mapping helper files
@@ -30,17 +34,26 @@ mixtures_IDs = pd.read_csv(os.path.join(input_path, mixture_file))
 
 # Training dataframe
 training_set = pd.read_csv(os.path.join(input_path, training_task_file))
+all_training_set = pd.read_csv(all_task_file)
 # test dataframe
+leaderboard_set = pd.read_csv(leaderboard_task_file)
 test_set = pd.read_csv(test_task_file)
 
 
-def stacking_X_features(CID2features_list, method):
+def stacking_X_features(CID2features_list, method, data = 'training'):
 
+    # added for testing in different scenarios:
+    if data == 'training':
+        training_dataset = training_set
+    elif data == 'all':
+        training_dataset = all_training_set
+
+    training_size = len(training_dataset)
     stacks = []
     
     for CID2features in CID2features_list:
 
-        X, y_true, num_mixtures, all_pairs_CIDs = format_Xy(training_set,  mixtures_IDs, CID2features, method = method)
+        X, y_true, num_mixtures, all_pairs_CIDs = format_Xy(training_dataset,  mixtures_IDs, CID2features, method = method)
         X_pairs = np.array([(np.concatenate((x1, x2))) for x1, x2 in X])
         
         distances= [get_euclidean_distance(m[0], m[1]) for m in X]
@@ -48,26 +61,26 @@ def stacking_X_features(CID2features_list, method):
         angles = [get_cosine_angle(m[0], m[1]) for m in X] 
         
         stack = np.hstack( (X_pairs,
-                        np.array(distances).reshape(500, 1), 
-                        np.array(similarities).reshape(500, 1), 
-                        np.array(angles).reshape(500, 1)))
+                        np.array(distances).reshape(training_size, 1), 
+                        np.array(similarities).reshape(training_size, 1), 
+                        np.array(angles).reshape(training_size, 1)))
         stacks.append(stack)
     
 
     shared_monos = [ len( set(pair[0]).intersection(set(pair[1]))) for pair in all_pairs_CIDs]
     diff_monos = [ len( set(pair[0]).difference(set(pair[1]))) for pair in all_pairs_CIDs]
     
-    datasets = training_set['Dataset'].to_numpy()
+    datasets = training_dataset['Dataset'].to_numpy()
     # Returns the uniques in the order of appearance
-    desired_order = training_set['Dataset'].unique().tolist() 
+    desired_order = training_dataset['Dataset'].unique().tolist() 
     encoder = OneHotEncoder(categories=[desired_order])
     data_arr = encoder.fit_transform(datasets.reshape(-1, 1))
     data_arr = data_arr.toarray()
 
     engineered_stack = np.hstack(
-                        (np.array(shared_monos).reshape(500, 1), 
-                        np.array(diff_monos).reshape(500, 1), 
-                        np.array(num_mixtures).reshape(500,2), 
+                        (np.array(shared_monos).reshape(training_size, 1), 
+                        np.array(diff_monos).reshape(training_size, 1), 
+                        np.array(num_mixtures).reshape(training_size,2), 
                         data_arr))
     
     stacks.append(engineered_stack)
@@ -113,13 +126,22 @@ def ensemble_models_with_bootstrap(X_features, y_true, param_best, type='rf', nu
     
     return models
 
-def stacking_X_test_features(CID2features_list, X_train, method):
+def stacking_X_test_features(CID2features_list, X_train, method, data = 'leaderboard'):
+
+    # added for testing in different scenarios:
+    if data == 'leaderboard':
+        test_dataset = leaderboard_set
+        
+    elif data == 'test':
+        test_dataset = test_set
+    
+    test_size = len(test_dataset)
 
     stacks = []
     
     for CID2features in CID2features_list:
 
-        X, y_true, num_mixtures, all_pairs_CIDs = format_Xy(test_set,  mixtures_IDs, CID2features, method = method)
+        X, y_true, num_mixtures, all_pairs_CIDs = format_Xy(test_dataset,  mixtures_IDs, CID2features, method = method)
         X_pairs = np.array([(np.concatenate((x1, x2))) for x1, x2 in X])
         
         distances= [get_euclidean_distance(m[0], m[1]) for m in X]
@@ -127,20 +149,20 @@ def stacking_X_test_features(CID2features_list, X_train, method):
         angles = [get_cosine_angle(m[0], m[1]) for m in X] 
         
         stack = np.hstack( (X_pairs,
-                        np.array(distances).reshape(46, 1), 
-                        np.array(similarities).reshape(46, 1), 
-                        np.array(angles).reshape(46, 1)))
+                        np.array(distances).reshape(test_size, 1), 
+                        np.array(similarities).reshape(test_size, 1), 
+                        np.array(angles).reshape(test_size, 1)))
         stacks.append(stack)
 
     shared_monos = [ len( set(pair[0]).intersection(set(pair[1]))) for pair in all_pairs_CIDs]
     diff_monos = [ len( set(pair[0]).difference(set(pair[1]))) for pair in all_pairs_CIDs]
     
-    data_arr = np.full((len(test_set), 4), np.nan) 
+    data_arr = np.full((len(test_dataset), 4), np.nan) 
 
     engineered_stack = np.hstack(
-                        (np.array(shared_monos).reshape(46, 1), 
-                        np.array(diff_monos).reshape(46, 1), 
-                        np.array(num_mixtures).reshape(46,2), 
+                        (np.array(shared_monos).reshape(test_size, 1), 
+                        np.array(diff_monos).reshape(test_size, 1), 
+                        np.array(num_mixtures).reshape(test_size,2), 
                         data_arr))
     
     stacks.append(engineered_stack)
@@ -158,6 +180,8 @@ def stacking_X_test_features(CID2features_list, X_train, method):
     X_test = imputer.transform(X_features)
 
     return X_test, np.array(y_true)
+
+
 
 def pred_mean(models, X_test):
 

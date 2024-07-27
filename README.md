@@ -596,6 +596,27 @@ Sequential Model Performance: {'RMSE': 0.11682718231230123, 'Correlation': 0.723
 
 But optimization doesn't seem to help too much. I haven't tried to swap the second model to non RF models.
 
+### 07/27/24
+
+1. waiting for Deepnose and Leffingwell features for CID 163; padding them with zeros first
+```
+# Add the new entry '650'
+features_CIDs_new = np.append(features_CIDs, 650)
+# Save the modified array back to the original file name
+np.save(os.path.join(input_path, CID_file), features_CIDs_new)
+
+# Add a row of zeros to each array, after standard transform
+features_2 = np.vstack((features_2, np.zeros((1, features_2.shape[1]))))
+features_4 = np.vstack((features_4, np.zeros((1, features_4.shape[1]))))
+```
+2. I modified a few data files, and added the option to choose what training dataset and what test dataset is. We have choices:
+	- Training:
+		- training
+		- training + leaderboard
+	- Test:
+		- leaderboard
+		- test
+
 ------
 
 ## Submission plans:
