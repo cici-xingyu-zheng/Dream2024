@@ -617,6 +617,10 @@ features_4 = np.vstack((features_4, np.zeros((1, features_4.shape[1]))))
 		- leaderboard
 		- test
 
+3. Incoporate features for CID = 650, which is a legit odor molecule. Submitted the leaderboard result of the metal model with 'sum' being replaced with 'avg'. 
+
+4. Starting Symmetric training.
+
 ------
 
 ## Submission plans:
