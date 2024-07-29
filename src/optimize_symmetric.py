@@ -11,13 +11,16 @@ from src.utils import *
 
 
 class MatchedKFold(BaseEstimator, MetaEstimatorMixin):
+    '''class inplace of KFold for random search'''
     def __init__(self, n_splits=5, shuffle=True, random_state=None):
         self.n_splits = n_splits
         self.shuffle = shuffle
         self.random_state = random_state
 
     def split(self, X, y=None, groups=None):
+        # Couple 2i and 2i+1 th samples:
         n_samples = X.shape[0] // 2
+        # Create split based on original number of samples:
         base_kf = KFold(n_splits=self.n_splits, shuffle=self.shuffle, random_state=self.random_state)
         for train_index, test_index in base_kf.split(np.arange(n_samples)):
             train_index_matched = np.concatenate([2*train_index, 2*train_index+1])
@@ -47,7 +50,6 @@ def para_search(seed, X, y_true):
     }
 
 
-    # Create models
     rf = RandomForestRegressor(random_state=seed)
     xgb_model = xgb.XGBRegressor(random_state=seed)
 
@@ -111,6 +113,7 @@ def avg_rf_best(rf_best, X_features, y_true):
         original_indices = np.arange(X_features.shape[0] // 2)
         kf = KFold(n_splits=n_fold, shuffle=True, random_state=seed)
         
+
         rf_corr_fold, rf_rmse_fold = [], []
         rf_corr_avg_fold, rf_rmse_avg_fold = [], []
         
@@ -128,13 +131,13 @@ def avg_rf_best(rf_best, X_features, y_true):
             all_rf_pred.extend(rf_pred)
             all_y_true.extend(y_test)
             
-            # Non-averaged metrics
+            # Non-averaged metrics, per fold
             rf_corr = np.corrcoef(rf_pred, y_test)[0, 1]
             rf_rmse = np.sqrt(mean_squared_error(y_test, rf_pred))
             rf_corr_fold.append(rf_corr)
             rf_rmse_fold.append(rf_rmse)
             
-            # Averaged metrics
+            # Averaged metrics, per fold
             rf_pred_avg = (rf_pred[0::2] + rf_pred[1::2]) / 2
             y_test_avg = (y_test[0::2] + y_test[1::2]) / 2
             # print('ytest_avg')
@@ -150,10 +153,11 @@ def avg_rf_best(rf_best, X_features, y_true):
         rf_rmse_avg_list.append(np.mean(rf_rmse_avg_fold))
 
     # Calculate metrics for the entire dataset
+    # Non-averaged:
     all_rf_pred, all_y_true = np.array(all_rf_pred), np.array(all_y_true)
     overall_corr = np.corrcoef(all_rf_pred, all_y_true)[0, 1]
     overall_rmse = np.sqrt(mean_squared_error(all_y_true, all_rf_pred))
-    
+    # Averaged:   
     all_rf_pred_avg = (all_rf_pred[0::2] + all_rf_pred[1::2]) / 2
     all_y_true_avg = (all_y_true[0::2] + all_y_true[1::2]) / 2
     overall_corr_avg = np.corrcoef(all_rf_pred_avg, all_y_true_avg)[0, 1]

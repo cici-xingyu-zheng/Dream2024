@@ -619,7 +619,35 @@ features_4 = np.vstack((features_4, np.zeros((1, features_4.shape[1]))))
 
 3. Incoporate features for CID = 650, which is a legit odor molecule. Submitted the leaderboard result of the metal model with 'sum' being replaced with 'avg'. 
 
-4. Starting Symmetric training.
+4. Starting Symmetric training; will do another sainity check later today to check if matched fold's implemented correctly the same way for optimization and averaging.
+	- but it seems to work (that performance is better, and averaged is even slightly more so ..?)
+
+
+```
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+RandomForest Per-fold Performance (Non-averaged):
+R mean: 0.6443914569165956
+R std: 0.008026037535666296
+RMSE mean: 0.12107511655765386
+RMSE std: 0.0006756141880883378
+
+RandomForest Per-fold Performance (Averaged):
+R mean: 0.6448505553319176
+R std: 0.008027500944109
+RMSE mean: 0.1210369098747622
+RMSE std: 0.0006762684942064581
+
+RandomForest Overall Performance (Non-averaged):
+R: 0.6403762665082626
+RMSE: 0.1216801962648752
+
+RandomForest Overall Performance (Averaged):
+R: 0.6408182688040646
+RMSE: 0.12164256326616434
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+```
+
+So next, the rigorous way is to go overall symmetric training for all feature combos, or at least some of them, and then we hopefully will still find our "best feature combo" still holds, and then optimize them, and meta over them.
 
 ------
 
