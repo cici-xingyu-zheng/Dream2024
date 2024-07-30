@@ -649,6 +649,23 @@ RMSE: 0.12164256326616434
 
 So next, the rigorous way is to go overall symmetric training for all feature combos, or at least some of them, and then we hopefully will still find our "best feature combo" still holds, and then optimize them, and meta over them.
 
+### 07/29/24
+We will move symmetric training to hiabara. But will still log the progress here.
+
+1. Updated the optimization metrics; things are up and running now.
+
+`screen`'s not installed, so I used `tmux` to create a session; detach is ctrl B + D.
+
+To reattach:
+```
+tmux attach -t dense_selected
+```
+
+Before we run the sparse optimization, reset the n_jobs to be -1, and change to sparse specific hyperparameters. It could be that higher dimensional fingerprint perform better.
+
+Also the first thing would be to check the deepnose + mordred leaderboard performance.
+
+
 ------
 
 ## Submission plans:

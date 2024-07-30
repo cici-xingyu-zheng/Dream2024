@@ -8,24 +8,38 @@ from sklearn.metrics import mean_squared_error
 import numpy as np
 import pandas as pd
 import os
-
 import sys
-sys.path.append("/Users/xinzheng/Desktop/Desktop/DreamRF")
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
 from src.utils import *
 
 # Below we add functions that streamline feature stacking and testing.
 
-input_path = '/Users/xinzheng/Desktop/Desktop/DreamRF/Data/' # use absolute path
+# input_path = '/Users/xinzheng/Desktop/Desktop/DreamRF/Data/' # use absolute path
+
+# CID_file = 'molecules_train_cid.npy'
+# mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
+
+# training_task_file = 'TrainingData_mixturedist.csv'
+# all_task_file =  '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/AllData_mixturedist.csv'
+
+# leaderboard_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/LeaderboardData_mixturedist.csv'
+# test_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/TestData_mixsturedist.csv'
+# Use os.path.join for creating paths
+
+input_path = os.path.join(parent_dir, 'Data')
 
 CID_file = 'molecules_train_cid.npy'
-mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv' 
+mixture_file = 'Mixure_Definitions_Training_set_UPD2.csv'
 
 training_task_file = 'TrainingData_mixturedist.csv'
-all_task_file =  '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/AllData_mixturedist.csv'
+all_task_file = os.path.join(parent_dir, 'Test', 'Data', 'AllData_mixturedist.csv')
 
-leaderboard_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/LeaderboardData_mixturedist.csv'
-test_task_file = '/Users/xinzheng/Desktop/Desktop/DreamRF/Test/Data/TestData_mixsturedist.csv'
-
+leaderboard_task_file = os.path.join(parent_dir, 'Test', 'Data', 'LeaderboardData_mixturedist.csv')
+test_task_file = os.path.join(parent_dir, 'Test', 'Data', 'TestData_mixsturedist.csv')
 
 features_CIDs = np.load(os.path.join(input_path, CID_file))
 # Mapping helper files

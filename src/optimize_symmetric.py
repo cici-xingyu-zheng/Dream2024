@@ -6,7 +6,16 @@ import numpy as np
 import xgboost as xgb
 
 import sys
-sys.path.append("/Users/xinzheng/Desktop/Desktop/DreamRF")
+import os
+# sys.path.append("/Users/xinzheng/Desktop/Desktop/DreamRF")
+# Dynamically set python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+
+# Add the parent directory to the Python path
+sys.path.append(parent_dir)
+
+from src.utils import *
 from src.utils import *
 
 
