@@ -665,6 +665,13 @@ Before we run the sparse optimization, reset the n_jobs to be -1, and change to 
 
 Also the first thing would be to check the deepnose + mordred leaderboard performance.
 
+2. Well let's simply use sklearn's own parallel. I tried swapping features while stacking, doesn't change performance which is more comforting lol.
+	- Monday: afternoon moved to hiabara; set up symmetric training script, run overnight for dense optimization;
+	- Tuesday: morning run sparse optimization; finished 4pm
+	- Tuesday: evening, setup symmetric training for meta model
+
+3. It's kind of inexplicable why we don't see as big an improvement for the meta model, 10-fold cv improved a lot compared to the best before symmetrical training.
+
 
 ------
 
