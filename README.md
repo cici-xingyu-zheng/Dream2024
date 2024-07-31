@@ -667,8 +667,10 @@ Also the first thing would be to check the deepnose + mordred leaderboard perfor
 
 2. Well let's simply use sklearn's own parallel. I tried swapping features while stacking, doesn't change performance which is more comforting lol.
 	- Monday: afternoon moved to hiabara; set up symmetric training script, run overnight for dense optimization;
+		- second batch with stacking;
 	- Tuesday: morning run sparse optimization; finished 4pm
-	- Tuesday: evening, setup symmetric training for meta model
+		- second batch ran later, with stacking;
+	- Tuesday: evening, setup symmetric training for meta model; trouble shooting
 
 3. It's kind of inexplicable why we don't see as big an improvement for the meta model, 10-fold cv improved a lot compared to the best before symmetrical training.
 
@@ -690,7 +692,114 @@ I've done R and RMSE bootstrapping for leaderboard, but perhaps we will rank mod
 
 Not sure what we judge on; since for meta models, polynomial ridge perform better in cross fold validation. 
 
+Forgot to swap # of molecules :/ uh.. 
+Tried it last minute; not changing too much; gave up.
+
+#### Model to submit metrics:
+
+```
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+27 1 sum
+
+Start 10-fold cv ...
+Overall Performance:
+==================================================
+
+dense_model:
+  RMSE: 0.1206
+  Correlation: 0.6485
+
+sparse_model:
+  RMSE: 0.1218
+  Correlation: 0.6283
+
+stacked_model_Ridge:
+  RMSE: 0.1187
+  Correlation: 0.6516
+
+stacked_model_Poly_Ridge:
+  RMSE: 0.1184
+  Correlation: 0.6551
+
+stacked_model_RF:
+  RMSE: 0.1199
+  Correlation: 0.6451
+
+stacked_model_GB:
+  RMSE: 0.1197
+  Correlation: 0.6455
+
+stacked_model_KNN:
+  RMSE: 0.1193
+  Correlation: 0.6492
+
+
+Fold Results Summary:
+==================================================
+
+dense_model:
+  RMSE:
+    Mean ± Std: 0.1199 ± 0.0132
+  Correlation:
+    Mean ± Std: 0.6449 ± 0.1068
+
+sparse_model:
+  RMSE:
+    Mean ± Std: 0.1209 ± 0.0145
+  Correlation:
+    Mean ± Std: 0.6241 ± 0.1132
+
+stacked_model_Ridge:
+  RMSE:
+    Mean ± Std: 0.1179 ± 0.0143
+  Correlation:
+    Mean ± Std: 0.6470 ± 0.1049
+
+stacked_model_Poly_Ridge:
+  RMSE:
+    Mean ± Std: 0.1175 ± 0.0142
+  Correlation:
+    Mean ± Std: 0.6515 ± 0.1031
+
+stacked_model_RF:
+  RMSE:
+    Mean ± Std: 0.1190 ± 0.0146
+  Correlation:
+    Mean ± Std: 0.6382 ± 0.1085
+
+stacked_model_GB:
+  RMSE:
+    Mean ± Std: 0.1188 ± 0.0147
+  Correlation:
+    Mean ± Std: 0.6385 ± 0.1083
+
+stacked_model_KNN:
+  RMSE:
+    Mean ± Std: 0.1185 ± 0.0137
+  Correlation:
+    Mean ± Std: 0.6443 ± 0.0991
+
+--------------------------------------------------
+Start final model ...
+
+Leaderbaord Performance (base models):
+
+dense - RMSE: 0.1179, Correlation: 0.7126
+sparse - RMSE: 0.1266, Correlation: 0.6306
+
+Leaderbaord Performance (meta models):
+
+Ridge - RMSE: 0.1193, Correlation: 0.6822
+Poly_Ridge - RMSE: 0.1210, Correlation: 0.6754
+RF - RMSE: 0.1125, Correlation: 0.7248
+GB - RMSE: 0.1131, Correlation: 0.7203
+KNN - RMSE: 0.1172, Correlation: 0.6949
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+```
+
+
 ------
+
 
 
 ## TO-DO:
