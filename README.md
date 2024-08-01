@@ -796,6 +796,9 @@ GB - RMSE: 0.1131, Correlation: 0.7203
 KNN - RMSE: 0.1172, Correlation: 0.6949
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
+### 08/01/24
+
+Submitted; the result submitted can be reproduced with the final noteboook on the cluster, but with the # of mixture swapping inactivated.
 
 
 ------
