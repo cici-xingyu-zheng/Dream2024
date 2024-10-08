@@ -803,8 +803,14 @@ Submitted; the result submitted can be reproduced with the final noteboook on th
 
 ------
 
+### 10/08/21
+
+__Results__: https://www.synapse.org/Synapse:syn53470621/wiki/627131
+
+__Summary__: (on Alex's Dropbox so not public link)[https://www.dropbox.com/home/CICI%20ZHENG/lab_projects/DREAM_olfactory_mixture_prediction/!competitor-models]
 
 
+------
 ## TO-DO:
 
 **Priority**:
